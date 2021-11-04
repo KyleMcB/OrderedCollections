@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "1.5.31"
+    `maven-publish`
 }
 
 group = "com.xingpeds.orderedCollections"
