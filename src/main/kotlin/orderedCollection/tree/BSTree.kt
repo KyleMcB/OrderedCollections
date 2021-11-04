@@ -83,7 +83,7 @@ class BSTree<K : Comparable<K>, V>(
     }
 
     //    inner class  _iterator<K:Comparable<K>,V>(var current:Node = leftMostNode())
-    inner class _Iterator(var current: Node<K, V>? = leftMostNode(), val end: Node<K, V>? = rightMostNode()) :
+    inner class _Iterator(var current: Node<K, V>? = leftMostNode(), val end: Node<K, V>? = null) :
         Iterator<Pair<K, V>> {
 
         /** Returns `true` if the iteration has more elements. */
@@ -255,7 +255,7 @@ class BSTree<K : Comparable<K>, V>(
         var closeOrEnd = findOrWouldBeParent(key)
         while (closeOrEnd?.compareTo(key) ?: 1 < 0) closeOrEnd = closeOrEnd!!.inOrderSuccessor()
         //once more for the "once past the end" style of iterators
-        closeOrEnd = closeOrEnd?.inOrderSuccessor()
+        if (closeOrEnd?.key == key) closeOrEnd = closeOrEnd?.inOrderSuccessor()
         return object : Iterable<Pair<K, V>> {
             /**
              * Returns an iterator over the elements of this object.
