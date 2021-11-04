@@ -11,7 +11,8 @@ class BSTree<K : Comparable<K>, V>(
         // find the first node that is greater than or equal to key
         var closeOrNode = findOrWouldBeParent(key)
         while ((closeOrNode?.compareTo(key)
-            ?: 1) < 0) closeOrNode = closeOrNode!!.inOrderSuccessor()
+                ?: 1) < 0
+        ) closeOrNode = closeOrNode!!.inOrderSuccessor()
 
         return object : Iterable<Pair<K, V>> {
             /** Returns an iterator over the elements of this object. */
@@ -80,12 +81,14 @@ class BSTree<K : Comparable<K>, V>(
     override fun iterator(): Iterator<Pair<K, V>> {
         return _Iterator()
     }
+
     //    inner class  _iterator<K:Comparable<K>,V>(var current:Node = leftMostNode())
-    inner class _Iterator(var current: Node<K, V>? = leftMostNode()) : Iterator<Pair<K, V>> {
+    inner class _Iterator(var current: Node<K, V>? = leftMostNode(), val end: Node<K, V>? = rightMostNode()) :
+        Iterator<Pair<K, V>> {
 
         /** Returns `true` if the iteration has more elements. */
         override fun hasNext(): Boolean {
-            if (current == null) return false
+            if (current == null || current == end) return false
             return true
         }
 
@@ -99,8 +102,19 @@ class BSTree<K : Comparable<K>, V>(
             throw NoSuchElementException()
         }
     }
+
     private fun leftMostNode(): Node<K, V>? {
         if (root == null) return null else return leftMostNode(root!!)
+    }
+
+    private fun rightMostNode(): Node<K, V>? {
+        if (root == null) return null else return rightMostNode(root!!)
+    }
+
+    private fun rightMostNode(node: Node<K, V>): Node<K, V> {
+        var current = node
+        while (current.right != null) current = current.right!!
+        return current
     }
 
     private fun leftMostNode(node: Node<K, V>): Node<K, V> {
@@ -146,7 +160,8 @@ class BSTree<K : Comparable<K>, V>(
                             // re-hook right
                             currentNode.right?.let { it.parent = newNode }
                         }
-                        Tree.InsertMode.IGNORE -> {} // ignore the new element
+                        Tree.InsertMode.IGNORE -> {
+                        } // ignore the new element
                     }
                     break
                 } else if (key > currentNode.key) {
@@ -237,6 +252,17 @@ class BSTree<K : Comparable<K>, V>(
     }
 
     override fun tailSet(key: K): Iterable<Pair<K, V>> {
-        return emptyList()
+        var closeOrEnd = findOrWouldBeParent(key)
+        while (closeOrEnd?.compareTo(key) ?: 1 < 0) closeOrEnd = closeOrEnd!!.inOrderSuccessor()
+        //once more for the "once past the end" style of iterators
+        closeOrEnd = closeOrEnd?.inOrderSuccessor()
+        return object : Iterable<Pair<K, V>> {
+            /**
+             * Returns an iterator over the elements of this object.
+             */
+            override fun iterator(): Iterator<Pair<K, V>> {
+                return _Iterator(end = closeOrEnd)
+            }
+        }
     }
 }
