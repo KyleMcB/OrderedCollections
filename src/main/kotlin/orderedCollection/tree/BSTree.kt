@@ -235,4 +235,8 @@ class BSTree<K : Comparable<K>, V>(
         }
         return true
     }
+
+    override fun tailSet(key: K): Iterable<Pair<K, V>> {
+        return emptyList()
+    }
 }
