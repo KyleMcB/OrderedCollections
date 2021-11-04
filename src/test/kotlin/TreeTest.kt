@@ -208,4 +208,18 @@ class EmptyTreeTests() {
         val list = tree.subList(0, 1)
         assertContentEquals(list, emptyList())
     }
+
+    @Test
+    fun getAnIterablesubSet() {
+        tree.insert(4 to "4")
+        tree.insert(2 to "2")
+        tree.insert(6 to "6")
+        tree.insert(1 to "1")
+        tree.insert(3 to "3")
+        tree.insert(5 to "5")
+        tree.insert(7 to "7")
+        val list = listOf(2, 3, 4)
+        val range = tree.subList(2, 4).toList().map { it.first }
+        assertContentEquals(list, range)
+    }
 }
