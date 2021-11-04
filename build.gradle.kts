@@ -3,7 +3,7 @@ plugins {
     `maven-publish`
 }
 
-group = "com.xingpeds.orderedCollections"
+group = "com.github.KyleMcB"
 version = "1.0-SNAPSHOT"
 
 repositories {
