@@ -189,6 +189,21 @@ class EmptyTreeTests() {
     }
 
     @Test
+    fun getAnIterabletailSetNoMatch() {
+
+
+        tree.insert(2 to "2")
+        tree.insert(6 to "6")
+        tree.insert(1 to "1")
+        tree.insert(3 to "3")
+        tree.insert(5 to "5")
+        tree.insert(7 to "7")
+        val list = listOf(1, 2, 3)
+        val lowerHalf = tree.tailSet(4).toList().map { it.first }
+        assertContentEquals(list, lowerHalf)
+    }
+
+    @Test
     fun getsubList() {
         val list = tree.subList(0, 1)
         assertContentEquals(list, emptyList())
