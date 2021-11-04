@@ -13,7 +13,7 @@ interface Tree<K : Comparable<K>, V> : OrderedCollection<Pair<K, V>> {
     fun atOrNull(key: K): V?
     fun headSet(key: K): Iterable<Pair<K, V>>
     fun tailSet(key: K): Iterable<Pair<K, V>>
-
+    fun subList(start: K, end: K): Iterable<Pair<K, V>>
     val insertMode: InsertMode
     enum class InsertMode {
         REPLACE,

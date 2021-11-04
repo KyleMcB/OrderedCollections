@@ -187,4 +187,10 @@ class EmptyTreeTests() {
         val lowerHalf = tree.tailSet(4).toList().map { it.first }
         assertContentEquals(list, lowerHalf)
     }
+
+    @Test
+    fun getsubList() {
+        val list = tree.subList(0, 1)
+        assertContentEquals(list, emptyList())
+    }
 }
