@@ -267,6 +267,16 @@ class BSTree<K : Comparable<K>, V>(
     }
 
     override fun subList(start: K, end: K): Iterable<Pair<K, V>> {
-        return emptyList()
+        val startOrClose = findOrWouldBeParent(start) ?: return emptyList()
+        var endOrClose = findOrWouldBeParent(end)
+        while (endOrClose?.compareTo(end) ?: 1 < 0) endOrClose = endOrClose?.inOrderSuccessor()
+        if (endOrClose?.key == end) endOrClose = endOrClose?.inOrderSuccessor()
+
+        return object : Iterable<Pair<K, V>> {
+
+            override fun iterator(): Iterator<Pair<K, V>> {
+                return _Iterator(current = startOrClose, end = endOrClose)
+            }
+        }
     }
 }
