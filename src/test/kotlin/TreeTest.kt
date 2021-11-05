@@ -10,6 +10,7 @@ import kotlin.test.*
 
 const val badData = "data retrieved did not match inserted"
 
+
 class EmptyTreeTests() {
     val tree: MutableTree<Int, String> = BSTree<Int, String>()
 
@@ -250,5 +251,11 @@ class EmptyTreeTests() {
         val list = listOf(2, 3)
         val range = tree.subList(2, 4).toList().map { it.first }
         assertContentEquals(list, range)
+    }
+
+    @Test
+    fun clear() {
+        tree.clear()
+        assertTrue(tree.size == 0)
     }
 }
