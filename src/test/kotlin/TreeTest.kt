@@ -4,13 +4,14 @@
 
 
 import orderedCollection.tree.BSTree
+import orderedCollection.tree.MutableTree
 import orderedCollection.tree.Tree
 import kotlin.test.*
 
 const val badData = "data retrieved did not match inserted"
 
 class EmptyTreeTests() {
-    val tree: Tree<Int, String> = BSTree<Int, String>()
+    val tree: MutableTree<Int, String> = BSTree<Int, String>()
 
     @Test
     fun addData() {

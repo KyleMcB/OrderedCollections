@@ -27,8 +27,11 @@ afterEvaluate {
     }
 }
 
-publishing {
-
+tasks.test {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
 }
 dependencies {
     implementation(kotlin("stdlib"))

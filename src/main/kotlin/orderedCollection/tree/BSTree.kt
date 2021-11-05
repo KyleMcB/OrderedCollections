@@ -6,7 +6,7 @@ package orderedCollection.tree
 
 class BSTree<K : Comparable<K>, V>(
     override val insertMode: Tree.InsertMode = Tree.InsertMode.REPLACE
-) : Tree<K, V>, AbstractCollection<Pair<K, V>>() {
+) : MutableTree<K, V>, AbstractCollection<Pair<K, V>>() {
     override fun headSet(key: K): Iterable<Pair<K, V>> {
         // find the first node that is greater than or equal to key
         var closeOrNode = findOrWouldBeParent(key)
