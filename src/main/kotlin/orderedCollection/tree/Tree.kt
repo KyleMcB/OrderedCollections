@@ -25,6 +25,7 @@ interface Tree<K : Comparable<K>, V> : OrderedCollection<Pair<K, V>> {
 interface MutableTree<K : Comparable<K>, V> : Tree<K, V> {
     fun removeAt(key: K): Boolean
     fun insert(pair: Pair<K, V>)
+    fun clear()
 }
 
 fun <K : Comparable<K>, V> Tree(): Tree<K, V> = BSTree<K, V>()
