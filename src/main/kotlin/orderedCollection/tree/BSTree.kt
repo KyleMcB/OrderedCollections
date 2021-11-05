@@ -83,7 +83,7 @@ class BSTree<K : Comparable<K>, V>(
     }
 
     //    inner class  _iterator<K:Comparable<K>,V>(var current:Node = leftMostNode())
-    inner class _Iterator(var current: Node<K, V>? = leftMostNode(), val end: Node<K, V>? = null) :
+    private inner class _Iterator(var current: Node<K, V>? = leftMostNode(), val end: Node<K, V>? = null) :
         Iterator<Pair<K, V>> {
 
         /** Returns `true` if the iteration has more elements. */
@@ -98,6 +98,39 @@ class BSTree<K : Comparable<K>, V>(
             current = current?.inOrderSuccessor()
             if (result != null) {
                 return result.key to result.value
+            }
+            throw NoSuchElementException()
+        }
+    }
+
+    private fun nodeList(): List<Node<K, V>> {
+        return object : Iterable<Node<K, V>> {
+            /**
+             * Returns an iterator over the elements of this object.
+             */
+            override fun iterator(): Iterator<Node<K, V>> {
+                return NodeIterator()
+            }
+        }.toList()
+    }
+
+    private inner class NodeIterator(var current: Node<K, V>? = leftMostNode()) : Iterator<Node<K, V>> {
+        /**
+         * Returns `true` if the iteration has more elements.
+         */
+        override fun hasNext(): Boolean {
+            return if (current == null) false
+            else true
+        }
+
+        /**
+         * Returns the next element in the iteration.
+         */
+        override fun next(): Node<K, V> {
+            val result = current
+            current = current?.inOrderSuccessor()
+            if (result != null) {
+                return result
             }
             throw NoSuchElementException()
         }
@@ -278,5 +311,16 @@ class BSTree<K : Comparable<K>, V>(
                 return _Iterator(current = startOrClose, end = endOrClose)
             }
         }
+    }
+
+    override fun clear() {
+        _size = 0
+        val list = nodeList()
+        for (node in list) {
+            node.left = null
+            node.right = null
+        }
+        root = null
+
     }
 }
