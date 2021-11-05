@@ -6,6 +6,8 @@
 import orderedCollection.tree.BSTree
 import orderedCollection.tree.MutableTree
 import orderedCollection.tree.Tree
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertIterableEquals
 import kotlin.test.*
 
 const val badData = "data retrieved did not match inserted"
@@ -257,5 +259,14 @@ class EmptyTreeTests() {
     fun clear() {
         tree.clear()
         assertTrue(tree.size == 0)
+        assertIterableEquals(emptyList<Pair<Int, String>>(), tree)
+    }
+
+    @Test
+    fun clearOne() {
+        tree.insert(1 to "1")
+        tree.clear()
+        assertTrue(tree.size == 0)
+        assertIterableEquals(emptyList<Pair<Int, String>>(), tree)
     }
 }
