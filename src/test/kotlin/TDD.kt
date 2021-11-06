@@ -13,17 +13,19 @@ import kotlin.test.*
 const val badData = "data retrieved did not match inserted"
 
 
-class EmptyTreeTests() {
+class TDDTreeTests() {
     val tree: MutableTree<Int, String> = BSTree<Int, String>()
 
     @Test
     fun addData() {
         tree.insert(1 to "hi")
     }
+
     @Test
     fun atNoElement() {
         assertFails { tree.at(1) }
     }
+
     @Test
     fun atOrNullNoElement() {
         assertNull(tree.atOrNull(1))
@@ -45,6 +47,7 @@ class EmptyTreeTests() {
         assertEquals("hi", hi, badData)
         assertEquals("other", other, badData)
     }
+
     @Test
     fun replace() {
         tree.insert(1 to "hi")
@@ -53,6 +56,7 @@ class EmptyTreeTests() {
         assertEquals("hello", tree.at(1), "element should be replaced")
         assertEquals("hi", tree.at(2), "we lost the child element when replacing")
     }
+
     @Test
     fun ingore() {
         val tree = BSTree<Int, String>(insertMode = Tree.InsertMode.IGNORE)
@@ -74,6 +78,7 @@ class EmptyTreeTests() {
         }
         assertEquals("other2hi", result, "inorder iterator failed")
     }
+
     @Test
     fun sortedOrder() {
         // POUT
@@ -87,12 +92,14 @@ class EmptyTreeTests() {
         }
         assertEquals(set.sorted(), list, "elements from the tree should be in sorted order")
     }
+
     @Test
     fun attempRemoveNonElement() {
         tree.insert(1 to "1")
         val res = tree.removeAt(2)
         assertEquals(false, res)
     }
+
     @Test
     fun removeOneElement() {
         tree.insert(1 to "1")
@@ -100,6 +107,7 @@ class EmptyTreeTests() {
         assertEquals(0, tree.size)
         assertNull(tree.atOrNull(1))
     }
+
     @Test
     fun removeWithOneChild() {
         tree.insert(1 to "1")
@@ -108,6 +116,7 @@ class EmptyTreeTests() {
         assertEquals(1, tree.size)
         assertNull(tree.atOrNull(1))
     }
+
     @Test
     fun removeWithOneChild2() {
         tree.insert(2 to "2")
@@ -116,6 +125,7 @@ class EmptyTreeTests() {
         assertEquals(1, tree.size)
         assertNull(tree.atOrNull(2))
     }
+
     @Test
     fun removeWithFullSubTrees() {
         tree.insert(4 to "4")
@@ -150,12 +160,14 @@ class EmptyTreeTests() {
         val upperHalf = tree.headSet(4).toList().map { it.first }
         assertContentEquals(list, upperHalf)
     }
+
     // iterator from headset of empty has nothing
     @Test
     fun getIteratorEmptyFails() {
         val iter = tree.headSet(5).iterator()
         assertEquals(false, iter.hasNext())
     }
+
     // if headset can not find a match then the closest one that is greater
     @Test
     fun getAnIterableheadSetWithoutMatch() {

@@ -36,4 +36,6 @@ tasks.test {
 dependencies {
     implementation(kotlin("stdlib"))
     testImplementation(kotlin("test"))
+    testImplementation(platform("org.junit:junit-bom:5.8.1"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
 }
