@@ -6,8 +6,19 @@ package orderedCollection.tree
 
 import orderedCollection.OrderedCollection
 
-interface Tree<K : Comparable<K>, V> : OrderedCollection<Pair<K, V>> {
 
+class TreeComparator<K : Comparable<K>, V> : java.util.Comparator<Pair<K, V>> {
+    override fun compare(o1: Pair<K, V>?, o2: Pair<K, V>?): Int {
+        return when {
+            o1 == null && o2 == null -> 0
+            o1 == null && o2 != null -> -1
+            o1 != null && o2 == null -> 1
+            else -> o1!!.first.compareTo(o2!!.first)
+        }
+    }
+}
+
+interface Tree<K : Comparable<K>, V> : OrderedCollection<Pair<K, V>, TreeComparator<K, V>> {
     fun at(key: K): V
 
     fun atOrNull(key: K): V?

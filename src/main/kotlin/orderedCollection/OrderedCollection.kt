@@ -4,4 +4,4 @@
 
 package orderedCollection
 
-interface OrderedCollection<E> : Collection<E> {}
+interface OrderedCollection<E, C : Comparator<E>> : Collection<E> {}
