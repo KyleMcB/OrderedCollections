@@ -37,7 +37,7 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E> {
     override fun listIterator(): ListIterator<E> {
         return object : ListIterator<E> {
             override fun hasNext(): Boolean {
-                TODO("Not yet implemented")
+                return false
             }
 
             override fun hasPrevious(): Boolean {
