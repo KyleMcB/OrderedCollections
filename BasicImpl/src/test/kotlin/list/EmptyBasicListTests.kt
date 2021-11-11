@@ -7,6 +7,6 @@ import org.junit.jupiter.api.Test
 
 class EmptyBasicListTests : EmptyOrderedListTests<Int> {
     override val list: OrderedList<Int> = BasicOrderedList<Int>()
-
-
+    override val exampleValue: Int
+        get() = 1
 }
