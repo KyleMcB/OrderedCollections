@@ -42,5 +42,10 @@ interface EmptyOrderedListTests<E : Comparable<E>> {
     fun `containsAll is false`() {
         assertFalse(list.containsAll(listOf(exampleValue)))
     }
+
+    @Test
+    fun `indexOf is -1 for emptyList`() {
+        assertTrue(list.indexOf(exampleValue) == -1)
+    }
 }
 
