@@ -47,5 +47,10 @@ interface EmptyOrderedListTests<E : Comparable<E>> {
     fun `indexOf is -1 for emptyList`() {
         assertTrue(list.indexOf(exampleValue) == -1)
     }
+
+    @Test
+    fun `lastIndexOf is -1`() {
+        assertTrue(list.lastIndexOf(exampleValue) == -1)
+    }
 }
 
