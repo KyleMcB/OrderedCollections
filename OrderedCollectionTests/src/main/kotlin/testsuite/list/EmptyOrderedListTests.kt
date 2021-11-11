@@ -65,6 +65,12 @@ interface EmptyOrderedListTests<E : Comparable<E>> {
         assertThrows<NoSuchElementException> {
             list.listIterator().next()
         }
+
+    }
+
+    @Test
+    fun `nextIndex is 0`() {
+        assertTrue(list.listIterator().nextIndex() == 0)
     }
 }
 
