@@ -2,7 +2,7 @@ package list
 
 import orderedCollection.list.OrderedList
 
-class BasicOrderedList<E : Comparable<E>> : OrderedList<E> {
+class BasicOrderedList<E : Comparable<E>> : OrderedList<E>, AbstractList<E>() {
     override val size: Int
         get() = 0
 
@@ -75,8 +75,5 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E> {
         return _Iterator(index)
     }
 
-    //    //end is exclusive
-    override fun subList(fromIndex: Int, toIndex: Int): List<E> {
-        TODO("Not yet implemented")
-    }
+
 }
