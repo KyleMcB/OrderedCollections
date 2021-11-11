@@ -1,10 +1,35 @@
 package list
 
+import orderedCollection.list.MutableOrderedList
 import orderedCollection.list.OrderedList
 
-class BasicOrderedList<E : Comparable<E>> : OrderedList<E>, AbstractList<E>() {
+class BasicOrderedList<E : Comparable<E>> : OrderedList<E>, AbstractList<E>(), MutableOrderedList<E> {
     override val size: Int
         get() = 0
+
+    override fun add(element: E): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun addAll(elements: Collection<E>): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun clear() {
+        TODO("Not yet implemented")
+    }
+
+    override fun remove(element: E): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun removeAll(elements: Collection<E>): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun retainAll(elements: Collection<E>): Boolean {
+        TODO("Not yet implemented")
+    }
 
     override fun contains(element: E): Boolean {
         return false
@@ -18,8 +43,8 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E>, AbstractList<E>() {
         return true
     }
 
-    override fun iterator(): Iterator<E> {
-        return emptyList<E>().iterator()
+    override fun iterator(): MutableIterator<E> {
+        return mutableListOf<E>().iterator()
     }
 
     override fun get(index: Int): E {
