@@ -95,6 +95,26 @@ interface EmptyOrderedListTests<E : Comparable<E>> {
         assertFalse(it.hasNext())
     }
 
+    @Test
+    fun `list iterator0 hasPrevious is false`() {
+        assertFalse(list.listIterator(0).hasPrevious())
+    }
+
+    @Test
+    fun `list iterator0 next throws NoSuchElement`() {
+        assertThrows<NoSuchElementException> {
+            list.listIterator(0).next()
+        }
+    }
+
+    @Test
+    fun `list iterator next at negative index throw IndexOutOfBounds`() {
+        assertThrows<IndexOutOfBoundsException> {
+            list.listIterator(-1).next()
+        }
+    }
+
+//
 
 }
 
