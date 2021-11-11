@@ -107,18 +107,16 @@ interface EmptyOrderedListTests<E : Comparable<E>> {
         }
     }
 
-
     @Test
     fun `list iterator at negative index throw IndexOutOfBounds`() {
-        val it = list.listIterator(-1)
-        assertThrows<IndexOutOfBoundsException> { it.hasNext() }
-        assertThrows<IndexOutOfBoundsException> { it.hasPrevious() }
-        assertThrows<IndexOutOfBoundsException> { it.next() }
-        assertThrows<IndexOutOfBoundsException> { it.nextIndex() }
-        assertThrows<IndexOutOfBoundsException> { it.previous() }
-        assertThrows<IndexOutOfBoundsException> { it.previousIndex() }
+        assertThrows<IndexOutOfBoundsException> { list.listIterator(-1) }
+
     }
 
+    @Test
+    fun listIteratorPassedEnd() {
+        assertThrows<IndexOutOfBoundsException> { list.listIterator(1) }
 
+    }
 }
 
