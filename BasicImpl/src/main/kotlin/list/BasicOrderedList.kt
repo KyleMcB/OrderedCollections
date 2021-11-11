@@ -58,7 +58,7 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E> {
             }
 
             override fun previousIndex(): Int {
-                TODO("Not yet implemented")
+                return -1
             }
         }
     }
