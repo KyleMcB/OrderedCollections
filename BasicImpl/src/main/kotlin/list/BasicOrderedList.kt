@@ -35,12 +35,17 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E> {
     }
 
     inner class _Iterator(var index: Int = 0) : ListIterator<E> {
-        override fun hasNext(): Boolean {
-            return false
+        fun <T> throwIfNegative(block: () -> T): T {
+            if (index < 0) throw IndexOutOfBoundsException()
+            return block()
         }
 
-        override fun hasPrevious(): Boolean {
-            return false
+        override fun hasNext(): Boolean = throwIfNegative {
+            false
+        }
+
+        override fun hasPrevious(): Boolean = throwIfNegative {
+            false
         }
 
         override fun next(): E {
@@ -48,17 +53,16 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E> {
             throw NoSuchElementException()
         }
 
-        override fun nextIndex(): Int {
-            return 0
-
+        override fun nextIndex(): Int = throwIfNegative {
+            0
         }
 
-        override fun previous(): E {
+        override fun previous(): E = throwIfNegative {
             throw NoSuchElementException()
         }
 
-        override fun previousIndex(): Int {
-            return -1
+        override fun previousIndex(): Int = throwIfNegative {
+            -1
         }
     }
 
