@@ -59,5 +59,12 @@ interface EmptyOrderedListTests<E : Comparable<E>> {
         val it = list.listIterator()
         assertFalse(it.hasNext())
     }
+
+    @Test
+    fun `next throws NoSuchElement`() {
+        assertThrows<NoSuchElementException> {
+            list.listIterator().next()
+        }
+    }
 }
 
