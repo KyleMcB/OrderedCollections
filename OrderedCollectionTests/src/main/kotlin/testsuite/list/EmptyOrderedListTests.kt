@@ -52,5 +52,12 @@ interface EmptyOrderedListTests<E : Comparable<E>> {
     fun `lastIndexOf is -1`() {
         assertTrue(list.lastIndexOf(exampleValue) == -1)
     }
+
+    /////////////////////////////List iterator section///////////////////////////////
+    @Test
+    fun `list iterator hasNext is false`() {
+        val it = list.listIterator()
+        assertFalse(it.hasNext())
+    }
 }
 
