@@ -23,7 +23,7 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E> {
     }
 
     override fun get(index: Int): E {
-        TODO("Not yet implemented")
+        throw IndexOutOfBoundsException()
     }
 
     override fun indexOf(element: E): Int {
