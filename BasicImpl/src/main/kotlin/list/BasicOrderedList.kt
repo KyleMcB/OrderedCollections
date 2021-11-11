@@ -34,33 +34,35 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E> {
         return -1
     }
 
-    override fun listIterator(): ListIterator<E> {
-        return object : ListIterator<E> {
-            override fun hasNext(): Boolean {
-                return false
-            }
-
-            override fun hasPrevious(): Boolean {
-                return false
-            }
-
-            override fun next(): E {
-                throw NoSuchElementException()
-            }
-
-            override fun nextIndex(): Int {
-                return 0
-
-            }
-
-            override fun previous(): E {
-                throw NoSuchElementException()
-            }
-
-            override fun previousIndex(): Int {
-                return -1
-            }
+    inner class _Iterator : ListIterator<E> {
+        override fun hasNext(): Boolean {
+            return false
         }
+
+        override fun hasPrevious(): Boolean {
+            return false
+        }
+
+        override fun next(): E {
+            throw NoSuchElementException()
+        }
+
+        override fun nextIndex(): Int {
+            return 0
+
+        }
+
+        override fun previous(): E {
+            throw NoSuchElementException()
+        }
+
+        override fun previousIndex(): Int {
+            return -1
+        }
+    }
+
+    override fun listIterator(): ListIterator<E> {
+        return _Iterator()
     }
 
     override fun listIterator(index: Int): ListIterator<E> {

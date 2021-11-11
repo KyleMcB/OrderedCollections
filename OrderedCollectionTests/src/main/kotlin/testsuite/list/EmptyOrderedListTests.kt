@@ -87,5 +87,7 @@ interface EmptyOrderedListTests<E : Comparable<E>> {
     fun `previousIndex is -1`() {
         assertTrue(list.listIterator().previousIndex() == -1)
     }
+    ////////////////////////////List iterator at index section///////////////////////////////
+
 }
 
