@@ -45,7 +45,7 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E> {
             }
 
             override fun next(): E {
-                TODO("Not yet implemented")
+                throw NoSuchElementException()
             }
 
             override fun nextIndex(): Int {
