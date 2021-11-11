@@ -72,5 +72,10 @@ interface EmptyOrderedListTests<E : Comparable<E>> {
     fun `nextIndex is 0`() {
         assertTrue(list.listIterator().nextIndex() == 0)
     }
+
+    @Test
+    fun `hasPrevious is false`() {
+        assertFalse(list.listIterator().hasPrevious())
+    }
 }
 
