@@ -4,6 +4,8 @@ import orderedCollection.list.OrderedList
 import org.junit.jupiter.api.Assertions.assertIterableEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import java.lang.IndexOutOfBoundsException
 
 interface EmptyOrderedListTests<E : Comparable<E>> {
     val list: OrderedList<E>
@@ -16,6 +18,13 @@ interface EmptyOrderedListTests<E : Comparable<E>> {
     @Test
     fun `is iterable`() {
         assertIterableEquals(emptyList<Int>(), list)
+    }
+
+    @Test
+    fun `throws on get`() {
+        assertThrows<IndexOutOfBoundsException> {
+            list.get(0)
+        }
     }
 }
 
