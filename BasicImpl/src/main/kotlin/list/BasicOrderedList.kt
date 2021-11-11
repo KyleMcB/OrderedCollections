@@ -34,7 +34,7 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E> {
         return -1
     }
 
-    inner class _Iterator : ListIterator<E> {
+    inner class _Iterator(index: Int = 0) : ListIterator<E> {
         override fun hasNext(): Boolean {
             return false
         }
@@ -66,7 +66,7 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E> {
     }
 
     override fun listIterator(index: Int): ListIterator<E> {
-        TODO("Not yet implemented")
+        return _Iterator(index)
     }
 
     override fun subList(fromIndex: Int, toIndex: Int): List<E> {
