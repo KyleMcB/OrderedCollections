@@ -11,7 +11,7 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E> {
     }
 
     override fun containsAll(elements: Collection<E>): Boolean {
-        TODO("Not yet implemented")
+        return false
     }
 
     override fun isEmpty(): Boolean {
