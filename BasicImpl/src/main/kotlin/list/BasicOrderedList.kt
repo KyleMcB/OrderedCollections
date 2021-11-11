@@ -19,7 +19,7 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E> {
     }
 
     override fun iterator(): Iterator<E> {
-        TODO("Not yet implemented")
+        return emptyList<E>().iterator()
     }
 
     override fun get(index: Int): E {
