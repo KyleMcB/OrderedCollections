@@ -7,7 +7,7 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E> {
         get() = 0
 
     override fun contains(element: E): Boolean {
-        TODO("Not yet implemented")
+        return false
     }
 
     override fun containsAll(elements: Collection<E>): Boolean {
