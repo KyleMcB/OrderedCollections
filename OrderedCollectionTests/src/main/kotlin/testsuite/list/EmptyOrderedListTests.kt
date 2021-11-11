@@ -53,6 +53,11 @@ interface EmptyOrderedListTests<E : Comparable<E>> {
         assertTrue(list.lastIndexOf(exampleValue) == -1)
     }
 
+    @Test
+    fun subList() {
+        assertIterableEquals(emptyList<E>(), list.subList(0, 0))
+    }
+
     /////////////////////////////List iterator section///////////////////////////////
     @Test
     fun `list iterator hasNext is false`() {
@@ -90,6 +95,16 @@ interface EmptyOrderedListTests<E : Comparable<E>> {
 
     ////////////////////////////List iterator at index section///////////////////////////////
     @Test
+    fun `list iterator at negative index throw IndexOutOfBounds`() {
+        assertThrows<IndexOutOfBoundsException> { list.listIterator(-1) }
+    }
+
+    @Test
+    fun listIteratorPassedEnd() {
+        assertThrows<IndexOutOfBoundsException> { list.listIterator(1) }
+    }
+
+    @Test
     fun `list iterator0 hasNext is false`() {
         val it = list.listIterator(0)
         assertFalse(it.hasNext())
@@ -108,15 +123,19 @@ interface EmptyOrderedListTests<E : Comparable<E>> {
     }
 
     @Test
-    fun `list iterator at negative index throw IndexOutOfBounds`() {
-        assertThrows<IndexOutOfBoundsException> { list.listIterator(-1) }
-
+    fun iter0NextIndex() {
+        assertTrue(list.listIterator(0).nextIndex() == 0)
     }
 
     @Test
-    fun listIteratorPassedEnd() {
-        assertThrows<IndexOutOfBoundsException> { list.listIterator(1) }
-
+    fun iter0Previous() {
+        assertThrows<NoSuchElementException> { list.listIterator(0).previous() }
     }
+
+    @Test
+    fun iter0PreviousIndex() {
+        assertTrue(list.listIterator(0).previousIndex() == -1)
+    }
+
 }
 

@@ -75,6 +75,7 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E> {
         return _Iterator(index)
     }
 
+    //    //end is exclusive
     override fun subList(fromIndex: Int, toIndex: Int): List<E> {
         TODO("Not yet implemented")
     }
