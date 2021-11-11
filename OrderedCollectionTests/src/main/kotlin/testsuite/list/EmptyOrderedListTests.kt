@@ -37,5 +37,10 @@ interface EmptyOrderedListTests<E : Comparable<E>> {
             list.contains(exampleValue)
         )
     }
+
+    @Test
+    fun `containsAll is false`() {
+        assertFalse(list.containsAll(listOf(exampleValue)))
+    }
 }
 
