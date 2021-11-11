@@ -4,11 +4,15 @@ import orderedCollection.list.MutableOrderedList
 import orderedCollection.list.OrderedList
 
 class BasicOrderedList<E : Comparable<E>> : OrderedList<E>, AbstractList<E>(), MutableOrderedList<E> {
+    private var _size: Int = 0
     override val size: Int
-        get() = 0
+        get() {
+            return _size
+        }
 
     override fun add(element: E): Boolean {
-        TODO("Not yet implemented")
+        _size++
+        return true
     }
 
     override fun addAll(elements: Collection<E>): Boolean {
