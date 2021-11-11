@@ -15,7 +15,7 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E> {
     }
 
     override fun isEmpty(): Boolean {
-        TODO("Not yet implemented")
+        return true
     }
 
     override fun iterator(): Iterator<E> {
