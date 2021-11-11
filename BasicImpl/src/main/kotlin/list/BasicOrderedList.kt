@@ -41,7 +41,7 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E> {
             }
 
             override fun hasPrevious(): Boolean {
-                TODO("Not yet implemented")
+                return false
             }
 
             override fun next(): E {
