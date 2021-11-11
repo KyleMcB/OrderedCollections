@@ -27,7 +27,7 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E> {
     }
 
     override fun indexOf(element: E): Int {
-        TODO("Not yet implemented")
+        return -1
     }
 
     override fun lastIndexOf(element: E): Int {
