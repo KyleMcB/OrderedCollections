@@ -114,7 +114,6 @@ interface EmptyOrderedListTests<E : Comparable<E>> {
         }
     }
 
-//
 
 }
 

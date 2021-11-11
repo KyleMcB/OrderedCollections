@@ -34,7 +34,7 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E> {
         return -1
     }
 
-    inner class _Iterator(index: Int = 0) : ListIterator<E> {
+    inner class _Iterator(var index: Int = 0) : ListIterator<E> {
         override fun hasNext(): Boolean {
             return false
         }
@@ -44,6 +44,7 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E> {
         }
 
         override fun next(): E {
+            if (index < 0) throw IndexOutOfBoundsException()
             throw NoSuchElementException()
         }
 
