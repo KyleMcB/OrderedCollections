@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Assertions.assertIterableEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import java.lang.IndexOutOfBoundsException
 
 interface EmptyOrderedListTests<E : Comparable<E>> {
     val list: OrderedList<E>
@@ -25,6 +24,11 @@ interface EmptyOrderedListTests<E : Comparable<E>> {
         assertThrows<IndexOutOfBoundsException> {
             list.get(0)
         }
+    }
+
+    @Test
+    fun `is empty is true`() {
+        assertTrue(list.isEmpty())
     }
 }
 
