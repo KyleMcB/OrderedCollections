@@ -235,6 +235,7 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
         val retained = items.subList(1, 3).toList()
         map.addAll(items)
         map.retainAll(retained)
+        items.retainAll(retained)
         assertContentEquals(items, map)
     }
 }
