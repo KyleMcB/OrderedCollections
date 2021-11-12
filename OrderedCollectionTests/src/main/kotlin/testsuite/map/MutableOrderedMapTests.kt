@@ -200,4 +200,13 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
         map.clear()
         assertEquals(0, map.size)
     }
+
+    @Test
+    fun mapIsEmptyAfterClear() {
+        map.addAll(distinct.take(10))
+        map.clear()
+        assertContentEquals(emptyList(), map)
+    }
+
+    
 }
