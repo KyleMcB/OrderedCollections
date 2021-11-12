@@ -30,7 +30,17 @@ class BasicOrderedMap<K, V>(
     override fun isEmpty() = true
 
     override fun iterator() = list.iterator()
-    override fun add(element: Pair<K, V>) = list.add(element)
+    override fun add(element: Pair<K, V>): Boolean {
+        val index = list.binarySearch(element, comparator)
+        if (index < 0) {
+            val actualIndex = -(index + 1)
+            list.add(actualIndex, element)
+        } else when (duplicateKeyMode) {
+            OrderedMap.InsertMode.REPLACE -> list[index] = element
+            OrderedMap.InsertMode.IGNORE -> return false
+        }
+        return true
+    }
 
     override fun addAll(elements: Collection<Pair<K, V>>): Boolean {
         TODO("Not yet implemented")
