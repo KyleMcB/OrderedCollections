@@ -3,6 +3,7 @@ package testsuite.map
 import orderedCollection.map.MutableOrderedMap
 import orderedCollection.map.OrderedMap
 import org.junit.jupiter.api.Assumptions
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.*
@@ -218,11 +219,22 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
 
     @Test
     fun removeAll() {
-        val items = distinct.take(10).toMutableList()
-        val removed = items.subList(7, items.size)
+        val items = distinct.take(10).sortedBy { it.first }.toMutableList()
+        val removed = items.subList(7, items.size).toList()
         map.addAll(items)
         items.removeAll(removed)
         map.removeAll(removed)
+        println(items)
+        println(map.toList())
+        assertContentEquals(items, map)
+    }
+
+    @Test
+    fun retainAll() {
+        val items = distinct.take(10).sortedBy { it.first }.toMutableList()
+        val retained = items.subList(1, 3).toList()
+        map.addAll(items)
+        map.retainAll(retained)
         assertContentEquals(items, map)
     }
 }
