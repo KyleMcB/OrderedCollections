@@ -47,7 +47,7 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
     @Test
     fun headSetNoMatch() {
         val data = values.take(10).toMutableList()
-        data.sortWith(map.comparator)
+        data.sortBy { it.first }
         val item = data[7]
         data.remove(item)
         map.addAll(data)
@@ -60,7 +60,7 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
     fun tailSetExactMatch() {
         val data = values.take(10).toMutableList()
         map.addAll(data)
-        data.sortWith(map.comparator)
+        data.sortBy { it.first }
         val lowerPart = data.subList(0, 5)
         val result = map.tailSet(lowerPart.last().first)
         assertContentEquals(lowerPart, result)
@@ -69,13 +69,23 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
     @Test
     fun tailSetNoMatch() {
         val data = values.take(10).toMutableList()
-        data.sortWith(map.comparator)
+        data.sortBy { it.first }
         val removedItem = data[4]
         data.remove(removedItem)
         map.addAll(data)
         val lowerPart = data.subList(0, 4)
         val result = map.tailSet(removedItem.first)
         assertContentEquals(lowerPart, result)
+    }
+
+    @Test
+    fun sublistExactMatch() {
+        val data = values.take(10).toMutableList()
+        data.sortedBy { it.first }
+        val middlePart = data.subList(3, 8)
+        val result = map.subList(middlePart.first().first, middlePart.last().first)
+        assertContentEquals(middlePart, result)
+
     }
 
     @Test
