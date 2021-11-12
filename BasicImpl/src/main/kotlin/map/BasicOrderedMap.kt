@@ -58,11 +58,16 @@ class BasicOrderedMap<K, V>(
         if (isNotEmpty()) {
             val startPair = borrowFirstValue(start)
             val endPair = borrowFirstValue(end)
-            val startIndex = list.binarySearch(startPair, comparator)
+            val startIndex = positiveIndex(startPair)
             val endIndex = list.binarySearch(endPair, comparator)
             return list.subList(startIndex, endIndex)
         }
         return emptyList()
+    }
+
+    private fun positiveIndex(element: Pair<K, V>): Int {
+        val startIndex = list.binarySearch(element, comparator)
+        return if (startIndex < 0) invertIndexFromSearch(startIndex) else startIndex
     }
 
     override val size: Int

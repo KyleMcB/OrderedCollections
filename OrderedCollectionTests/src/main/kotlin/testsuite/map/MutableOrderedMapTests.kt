@@ -8,6 +8,7 @@ import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
+import kotlin.test.fail
 
 interface MutableOrderedMapTests<K : Comparable<K>, V> {
     val map: MutableOrderedMap<K, V>
@@ -37,9 +38,12 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
         assertNull(map.atOrNull(values.first().first))
     }
 
+    val distinct: Sequence<Pair<K, V>>
+        get() = values.distinct()
+
     @Test
     fun headSetExactMatch() {
-        val data = values.take(10).toList().sortedBy { it.first }
+        val data = distinct.take(10).toList().sortedBy { it.first }
         map.addAll(data)
         val upperPart = data.subList(7, 10)
         val result = map.headSet(upperPart.first().first)
@@ -48,7 +52,7 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
 
     @Test
     fun headSetNoMatch() {
-        val data = values.take(10).toMutableList()
+        val data = distinct.take(10).toMutableList()
         data.sortBy { it.first }
         val item = data[7]
         data.remove(item)
@@ -60,7 +64,7 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
 
     @Test
     fun tailSetExactMatch() {
-        val data = values.take(10).toMutableList()
+        val data = distinct.take(10).toMutableList()
         map.addAll(data)
         data.sortBy { it.first }
         val lowerPart = data.subList(0, 5)
@@ -70,7 +74,7 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
 
     @Test
     fun tailSetNoMatch() {
-        val data = values.take(10).toMutableList()
+        val data = distinct.take(10).toMutableList()
         data.sortBy { it.first }
         val removedItem = data[4]
         data.remove(removedItem)
@@ -82,7 +86,7 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
 
     @Test
     fun sublistExactMatch() {
-        val data = values.take(10).toMutableList()
+        val data = distinct.take(10).toMutableList()
         map.addAll(data)
         data.sortBy { it.first }
         val middlePart = data.subList(3, 7)
@@ -90,6 +94,18 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
         val result = map.subList(middlePart.first().first, endElement.first).toList()
         assertContentEquals(middlePart, result)
     }
+
+    @Test
+    fun sublistNoStartMatch() {
+        val data = distinct.take(10).sortedBy { it.first }.toMutableList()
+        val missingStartItem = data[4]
+        data.remove(missingStartItem)
+        map.addAll(data)
+        val middlePart = data.subList(4, 7)
+        val result = map.subList(missingStartItem.first, data[7].first)
+        assertEquals(middlePart, result)
+    }
+    
 
     @Test
     fun add() {
@@ -101,7 +117,7 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
     @Test
     fun addNonUniqueReplace() {
         Assumptions.assumeTrue(map.duplicateKeyMode == OrderedMap.InsertMode.REPLACE)
-        val (item1, item2) = values.take(2).toList()
+        val (item1, item2) = distinct.take(2).toList()
         map.add(item1)
         val newItem = item1.first to item2.second
         map.add(newItem)
@@ -117,21 +133,21 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
 
     @Test
     fun size2() {
-        val data = values.take(10).distinct().toList()
+        val data = distinct.take(10).toList()
         map.addAll(data)
         assertEquals(data.size, map.size)
     }
 
     @Test
     fun maintainSortAdd() {
-        val data = values.take(100).shuffled().toList().distinct()
+        val data = distinct.take(100).shuffled().toList()
         data.forEach { map.add(it) }
         assertContentEquals(data.sortedBy { it.first }, map)
     }
 
     @Test
     fun addAll() {
-        val data = values.take(100).shuffled().toList().distinct()
+        val data = distinct.take(100).shuffled().toList()
         map.addAll(data)
         assertContentEquals(data.sortedBy { it.first }, map)
     }
