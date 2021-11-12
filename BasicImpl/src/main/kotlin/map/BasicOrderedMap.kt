@@ -100,9 +100,7 @@ class BasicOrderedMap<K, V>(
 
     override fun clear() = list.clear()
 
-    override fun remove(element: Pair<K, V>): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun remove(element: Pair<K, V>) = list.remove(element)
 
     override fun removeAll(elements: Collection<Pair<K, V>>): Boolean {
         TODO("Not yet implemented")
