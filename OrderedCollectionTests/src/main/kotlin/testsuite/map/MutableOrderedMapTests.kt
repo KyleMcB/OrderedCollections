@@ -177,4 +177,13 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
         map.add(item)
         assertTrue(map.contains(item))
     }
+
+    @Test
+    fun notContains() {
+        val data = distinct.take(10).toMutableList()
+        val missingItem = data[5]
+        data.remove(missingItem)
+        map.addAll(data)
+        assertFalse { map.contains(missingItem) }
+    }
 }
