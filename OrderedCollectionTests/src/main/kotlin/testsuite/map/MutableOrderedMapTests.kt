@@ -105,9 +105,21 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
         map.add(item1)
         val newItem = item1.first to item2.second
         map.add(newItem)
-        assertEquals(1, map.size)
         assertEquals(newItem, map.first())
 
+    }
+
+    @Test
+    fun size() {
+        map.add(values.first())
+        assertEquals(1, map.size)
+    }
+
+    @Test
+    fun size2() {
+        val data = values.take(10).distinct().toList()
+        map.addAll(data)
+        assertEquals(data.size, map.size)
     }
 
     @Test
