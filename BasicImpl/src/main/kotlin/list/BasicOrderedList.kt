@@ -3,7 +3,9 @@ package list
 import orderedCollection.list.MutableOrderedList
 import orderedCollection.list.OrderedList
 
-class BasicOrderedList<E : Comparable<E>> : OrderedList<E>, AbstractList<E>(), MutableOrderedList<E> {
+class BasicOrderedList<E : Comparable<E>>(private val list: MutableList<E> = mutableListOf<E>()) : OrderedList<E>,
+    AbstractList<E>(), MutableOrderedList<E> {
+
     private var _size: Int = 0
     override val size: Int
         get() {
@@ -12,6 +14,7 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E>, AbstractList<E>(), M
 
     override fun add(element: E): Boolean {
         _size++
+        list.add(element)
         return true
     }
 
@@ -52,7 +55,9 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E>, AbstractList<E>(), M
     }
 
     override fun get(index: Int): E {
-        throw IndexOutOfBoundsException()
+        if (index < 0 || index > size)
+            throw IndexOutOfBoundsException()
+        return list[index]
     }
 
     override fun indexOf(element: E): Int {
