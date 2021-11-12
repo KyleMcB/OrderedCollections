@@ -21,4 +21,11 @@ interface MutableOrderedListTests<E : Comparable<E>> {
         }
         assertEquals(2, list.size)
     }
+
+    @Test
+    fun sizeIsZeroAfterClear() {
+        list.add(values.first())
+        list.clear()
+        assertEquals(0, list.size)
+    }
 }
