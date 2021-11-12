@@ -2,6 +2,7 @@ package testsuite.list
 
 import orderedCollection.list.MutableOrderedList
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 
@@ -34,5 +35,12 @@ interface MutableOrderedListTests<E : Comparable<E>> {
     fun isEmptyFalseAfterAdd() {
         list.add(values.first())
         assertFalse { list.isEmpty() }
+    }
+
+    @Test
+    fun getEmpty() {
+        assertThrows<IndexOutOfBoundsException> {
+            list[0]
+        }
     }
 }
