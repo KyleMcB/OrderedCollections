@@ -51,4 +51,13 @@ interface MutableOrderedListTests<E : Comparable<E>> {
         val result = list[0]
         assertEquals(value, result)
     }
+
+    @Test
+    fun addTwoRemoveOne() {
+        val (value1, value2) = values.take(2).toList()
+        list.add(value1)
+        list.add(value2)
+        list.remove(value1)
+        assertEquals(value2, list[0])
+    }
 }
