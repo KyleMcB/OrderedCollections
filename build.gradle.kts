@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021. Kyle McBurnett
+ */
+
 plugins {
     `java-library`
     id("org.jetbrains.kotlin.libs.publisher") version "0.0.60-dev-32"

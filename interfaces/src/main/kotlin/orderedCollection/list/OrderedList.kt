@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021. Kyle McBurnett
+ */
+
 package orderedCollection.list
 
 import orderedCollection.OrderedCollection

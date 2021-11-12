@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021. Kyle McBurnett
+ */
+
 @file:Suppress(
     "FunctionName", "FunctionName", "FunctionName", "FunctionName", "FunctionName", "FunctionName",
     "FunctionName", "FunctionName", "FunctionName", "FunctionName", "FunctionName", "FunctionName", "FunctionName",

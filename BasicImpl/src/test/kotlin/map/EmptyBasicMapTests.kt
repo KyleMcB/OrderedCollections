@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2021. Kyle McBurnett
+ */
+
 package map
 
 import orderedCollection.map.OrderedMap
