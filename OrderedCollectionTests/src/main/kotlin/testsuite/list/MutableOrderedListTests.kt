@@ -114,6 +114,13 @@ interface MutableOrderedListTests<E : Comparable<E>> {
     }
 
     @Test
+    fun containsAll() {
+        val data = values.take(5).toList()
+        list.addAll(data)
+        assertTrue(list.containsAll(data))
+    }
+
+    @Test
     fun retianAllOne() {
         val data = values.take(100).toList()
         val result = data.toMutableList()

@@ -30,9 +30,7 @@ class BasicOrderedList<E : Comparable<E>>(private val list: MutableList<E> = mut
 
     override fun contains(element: E) = list.contains(element)
 
-    override fun containsAll(elements: Collection<E>): Boolean {
-        return false
-    }
+    override fun containsAll(elements: Collection<E>) = list.containsAll(elements)
 
     override fun isEmpty() = list.isEmpty()
 
