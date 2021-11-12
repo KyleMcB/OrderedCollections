@@ -38,9 +38,7 @@ class BasicOrderedList<E : Comparable<E>>(private val list: MutableList<E> = mut
         TODO("Not yet implemented")
     }
 
-    override fun contains(element: E): Boolean {
-        return false
-    }
+    override fun contains(element: E) = list.contains(element)
 
     override fun containsAll(elements: Collection<E>): Boolean {
         return false
