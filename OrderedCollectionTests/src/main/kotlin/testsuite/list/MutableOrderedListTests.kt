@@ -109,6 +109,11 @@ interface MutableOrderedListTests<E : Comparable<E>> {
     }
 
     @Test
+    fun retainAllEmpty() {
+        assertFalse { list.retainAll(emptyList()) }
+    }
+
+    @Test
     fun removeAllOne() {
         val data = values.take(10).toList()
         val result = data.toMutableList()
