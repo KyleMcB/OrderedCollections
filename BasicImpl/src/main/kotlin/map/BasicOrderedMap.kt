@@ -9,12 +9,35 @@ class BasicOrderedMap<K, V>(
 ) : OrderedMap<K, V>, MutableOrderedMap<K, V> {
     private val list: MutableList<Pair<K, V>> = mutableListOf()
     override fun at(key: K): V {
+        if (isNotEmpty()) {
+            val item = key to list[0].second
+            val index = list.binarySearch(item, comparator)
+            if (index > -1)
+                return list[index].second
+        }
         throw NoSuchElementException()
     }
 
-    override fun atOrNull(key: K): V? = null
+    override fun atOrNull(key: K): V? {
+        return try {
+            at(key)
+        } catch (e: NoSuchElementException) {
+            null
+        }
+    }
 
-    override fun headSet(key: K) = emptyList<Pair<K, V>>()
+    override fun headSet(key: K): Iterable<Pair<K, V>> {
+        if (isNotEmpty()) {
+            val pair = key to list[0].second
+            val index = list.binarySearch(pair, comparator)
+            if (index > -1) return list.subList(index, list.size)
+            else {
+                val closeIndex = -(index + 1)
+                return list.subList(closeIndex, list.size)
+            }
+        }
+        return emptyList()
+    }
 
     override fun tailSet(key: K) = emptyList<Pair<K, V>>()
 
@@ -27,7 +50,7 @@ class BasicOrderedMap<K, V>(
 
     override fun containsAll(elements: Collection<Pair<K, V>>) = false
 
-    override fun isEmpty() = true
+    override fun isEmpty() = list.isEmpty()
 
     override fun iterator() = list.iterator()
     override fun add(element: Pair<K, V>): Boolean {
