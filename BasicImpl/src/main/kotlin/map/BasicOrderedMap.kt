@@ -59,7 +59,7 @@ class BasicOrderedMap<K, V>(
             val startPair = borrowFirstValue(start)
             val endPair = borrowFirstValue(end)
             val startIndex = positiveIndex(startPair)
-            val endIndex = list.binarySearch(endPair, comparator)
+            val endIndex = positiveIndex(endPair)
             return list.subList(startIndex, endIndex)
         }
         return emptyList()

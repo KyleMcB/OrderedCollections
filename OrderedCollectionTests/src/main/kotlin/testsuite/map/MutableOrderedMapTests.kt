@@ -105,6 +105,17 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
         val result = map.subList(missingStartItem.first, data[7].first)
         assertEquals(middlePart, result)
     }
+
+    @Test
+    fun sublistNoEndMatch() {
+        val data = distinct.take(10).sortedBy { it.first }.toMutableList()
+        val missingEnditem = data[8]
+        data.remove(missingEnditem)
+        map.addAll(data)
+        val middlePart = data.subList(2, 8)
+        val result = map.subList(data[2].first, missingEnditem.first)
+        assertContentEquals(middlePart, result)
+    }
     
 
     @Test
