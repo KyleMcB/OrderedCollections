@@ -77,7 +77,7 @@ class BasicOrderedMap<K, V>(
 
     override fun contains(element: Pair<K, V>) = list.contains(element)
 
-    override fun containsAll(elements: Collection<Pair<K, V>>) = false
+    override fun containsAll(elements: Collection<Pair<K, V>>) = list.containsAll(elements)
 
     override fun isEmpty() = list.isEmpty()
 
