@@ -26,7 +26,7 @@ class BasicOrderedList<E : Comparable<E>>(private val list: MutableList<E> = mut
 
     override fun removeAll(elements: Collection<E>) = list.removeAll(elements)
 
-    override fun retainAll(elements: Collection<E>) = false
+    override fun retainAll(elements: Collection<E>) = list.retainAll(elements)
 
     override fun contains(element: E) = list.contains(element)
 

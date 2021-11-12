@@ -114,6 +114,16 @@ interface MutableOrderedListTests<E : Comparable<E>> {
     }
 
     @Test
+    fun retianAllOne() {
+        val data = values.take(100).toList()
+        val result = data.toMutableList()
+        result.retainAll(data.subList(20, 30))
+        list.addAll(data)
+        list.retainAll(data.subList(20, 30))
+        assertIterableEquals(result, list)
+    }
+
+    @Test
     fun removeAllOne() {
         val data = values.take(10).toList()
         val result = data.toMutableList()
