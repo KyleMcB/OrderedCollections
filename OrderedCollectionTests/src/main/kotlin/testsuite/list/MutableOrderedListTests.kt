@@ -108,6 +108,16 @@ interface MutableOrderedListTests<E : Comparable<E>> {
         assertFalse { list.removeAll(emptyList()) }
     }
 
+    @Test
+    fun removeAllOne() {
+        val data = values.take(10).toList()
+        val result = data.toMutableList()
+        result.removeAll(data.subList(2, 4))
+        list.addAll(data)
+        list.removeAll(data.subList(2, 4))
+        assertIterableEquals(result, list)
+    }
+
     @Disabled
     @Test
     fun sortedOrderAddAll() {
