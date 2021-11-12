@@ -6,14 +6,12 @@ import orderedCollection.list.OrderedList
 class BasicOrderedList<E : Comparable<E>>(private val list: MutableList<E> = mutableListOf<E>()) : OrderedList<E>,
     AbstractList<E>(), MutableOrderedList<E> {
 
-    private var _size: Int = 0
     override val size: Int
         get() {
-            return _size
+            return list.size
         }
 
     override fun add(element: E): Boolean {
-        _size++
         list.add(element)
         return true
     }
@@ -22,9 +20,7 @@ class BasicOrderedList<E : Comparable<E>>(private val list: MutableList<E> = mut
         TODO("Not yet implemented")
     }
 
-    override fun clear() {
-        _size = 0
-    }
+    override fun clear() = list.clear()
 
     override fun remove(element: E): Boolean {
         return list.remove(element)
@@ -44,19 +40,13 @@ class BasicOrderedList<E : Comparable<E>>(private val list: MutableList<E> = mut
         return false
     }
 
-    override fun isEmpty(): Boolean {
-        return _size == 0
-    }
+    override fun isEmpty() = list.isEmpty()
 
     override fun iterator(): MutableIterator<E> {
         return mutableListOf<E>().iterator()
     }
 
-    override fun get(index: Int): E {
-        if (index < 0 || index > size)
-            throw IndexOutOfBoundsException()
-        return list[index]
-    }
+    override fun get(index: Int) = list[index]
 
     override fun indexOf(element: E): Int {
         return -1
@@ -66,46 +56,9 @@ class BasicOrderedList<E : Comparable<E>>(private val list: MutableList<E> = mut
         return -1
     }
 
-    inner class _Iterator(var index: Int = 0) : ListIterator<E> {
+    override fun listIterator() = list.listIterator()
 
-        init {
-            if (index !in (0..size)) throw IndexOutOfBoundsException()
-        }
-
-        override fun hasNext(): Boolean {
-            if (index > size) throw IndexOutOfBoundsException()
-            return false
-        }
-
-        override fun hasPrevious(): Boolean {
-            return false
-        }
-
-        override fun next(): E {
-            if (index < 0) throw IndexOutOfBoundsException()
-            throw NoSuchElementException()
-        }
-
-        override fun nextIndex(): Int {
-            return 0
-        }
-
-        override fun previous(): E {
-            throw NoSuchElementException()
-        }
-
-        override fun previousIndex(): Int {
-            return -1
-        }
-    }
-
-    override fun listIterator(): ListIterator<E> {
-        return _Iterator()
-    }
-
-    override fun listIterator(index: Int): ListIterator<E> {
-        return _Iterator(index)
-    }
+    override fun listIterator(index: Int) = list.listIterator(index)
 
 
 }

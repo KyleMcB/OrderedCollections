@@ -1,8 +1,12 @@
 package testsuite.list
 
 import orderedCollection.list.MutableOrderedList
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertIterableEquals
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -67,5 +71,46 @@ interface MutableOrderedListTests<E : Comparable<E>> {
         val value = values.first()
         list.add(value)
         assertTrue(list.contains(value))
+    }
+
+    @Test
+    fun iterator() {
+        val (value1, value2) = values.take(2).toList()
+        list.add(value1)
+        list.add(value2)
+        assertEquals(value1, list.first())
+    }
+
+    @Test
+    fun emptyListAfterClear() {
+        values.take(100).toList().forEach { list.add(it) }
+        list.clear()
+        assertIterableEquals(emptyList<E>(), list)
+        assertContentEquals(emptyList<E>(), list)
+    }
+
+    @Test
+    fun throwsAfterClearandGet() {
+        values.take(5).toList().forEach { list.add(it) }
+        list.clear()
+        assertThrows<IndexOutOfBoundsException> { list[0] }
+    }
+
+    @Disabled
+    @Test
+    fun sortedOrderAddAll() {
+        val data = values.take(1000).shuffled().toList()
+        list.addAll(data)
+        assertIterableEquals(data.sorted(), list)
+    }
+
+    @Disabled
+    @Test
+    fun sortedOrderAdd() {
+        val data = values.take(1000).shuffled().toList()
+        data.forEach {
+            list.add(it)
+        }
+        assertIterableEquals(data.sorted(), list)
     }
 }
