@@ -156,4 +156,5 @@ interface MutableOrderedListTests<E : Comparable<E>> {
         }
         assertIterableEquals(data.sorted(), list)
     }
+
 }
