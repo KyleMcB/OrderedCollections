@@ -1,9 +1,7 @@
 package testsuite.list
 
 import orderedCollection.list.MutableOrderedList
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertIterableEquals
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertContentEquals
@@ -85,8 +83,7 @@ interface MutableOrderedListTests<E : Comparable<E>> {
     fun emptyListAfterClear() {
         values.take(100).toList().forEach { list.add(it) }
         list.clear()
-        assertIterableEquals(emptyList<E>(), list)
-        assertContentEquals(emptyList<E>(), list)
+        assertContentEquals(emptyList(), list)
     }
 
     @Test

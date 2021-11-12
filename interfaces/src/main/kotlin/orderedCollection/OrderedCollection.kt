@@ -4,6 +4,8 @@
 
 package orderedCollection
 
-interface OrderedCollection<E, C : Comparator<E>> : Collection<E> {}
+interface OrderedCollection<E> : Collection<E> {
+    val comparator: Comparator<E>
+}
 
-interface MutableOrderedCollection<E, C : Comparator<E>> : OrderedCollection<E, C>, MutableCollection<E>
+interface MutableOrderedCollection<E> : OrderedCollection<E>, MutableCollection<E>

@@ -3,10 +3,14 @@ package list
 import orderedCollection.list.MutableOrderedList
 import orderedCollection.list.OrderedList
 
-class BasicOrderedList<E : Comparable<E>>(private val list: MutableList<E> = mutableListOf<E>()) : OrderedList<E>,
+class BasicOrderedList<E>(
+    override val comparator: Comparator<E>,
+    private val list: MutableList<E> = mutableListOf()
+) : OrderedList<E>,
+
     AbstractList<E>(), MutableOrderedList<E> {
     init {
-        list.sort()
+        list.sortWith(comparator)
     }
 
     override val size: Int
@@ -15,7 +19,7 @@ class BasicOrderedList<E : Comparable<E>>(private val list: MutableList<E> = mut
         }
 
     override fun add(element: E): Boolean {
-        val potentialIndex = list.binarySearch(element)
+        val potentialIndex = list.binarySearch(element = element, comparator = comparator)
         if (potentialIndex > 0) {
             list.add(potentialIndex, element)
         } else {
@@ -25,7 +29,7 @@ class BasicOrderedList<E : Comparable<E>>(private val list: MutableList<E> = mut
         return true
     }
 
-    override fun addAll(elements: Collection<E>) = list.addAll(elements).also { list.sort() }
+    override fun addAll(elements: Collection<E>) = list.addAll(elements).also { list.sortWith(comparator) }
 
     override fun clear() = list.clear()
 
