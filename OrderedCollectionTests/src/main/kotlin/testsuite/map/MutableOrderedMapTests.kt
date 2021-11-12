@@ -5,10 +5,7 @@ import orderedCollection.map.OrderedMap
 import org.junit.jupiter.api.Assumptions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import kotlin.test.assertContentEquals
-import kotlin.test.assertEquals
-import kotlin.test.assertNull
-import kotlin.test.fail
+import kotlin.test.*
 
 interface MutableOrderedMapTests<K : Comparable<K>, V> {
     val map: MutableOrderedMap<K, V>
@@ -174,4 +171,10 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
         assertContentEquals(data.sortedBy { it.first }, map)
     }
 
+    @Test
+    fun contains() {
+        val item = distinct.first()
+        map.add(item)
+        assertTrue(map.contains(item))
+    }
 }
