@@ -14,6 +14,14 @@ interface OrderedMap<K, V> : OrderedCollection<Pair<K, V>> {
     fun atOrNull(key: K): V?
     fun headSet(key: K): Iterable<Pair<K, V>>
     fun tailSet(key: K): Iterable<Pair<K, V>>
+
+    /**
+     * subList return a "list" of element that are in the range [start,end)
+     *
+     * @param start value to start the sublist at
+     * @param end exclusive endpoint
+     * @return Iterable of contents. This is so you can use the extension functions toList and toMap
+     */
     fun subList(start: K, end: K): Iterable<Pair<K, V>>
     val duplicateKeyMode: InsertMode
 

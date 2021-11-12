@@ -2,7 +2,10 @@ package map
 
 import orderedCollection.map.OrderedMap
 
-class BasicOrderedMap<K, V>(override val comparator: Comparator<Pair<K, V>>) : OrderedMap<K, V> {
+class BasicOrderedMap<K, V>(
+    override val comparator: Comparator<Pair<K, V>>,
+    override val duplicateKeyMode: OrderedMap.InsertMode = OrderedMap.InsertMode.REPLACE
+) : OrderedMap<K, V> {
     private val list: MutableList<Pair<K, V>> = mutableListOf()
     override fun at(key: K): V {
         TODO("Not yet implemented")
@@ -24,23 +27,14 @@ class BasicOrderedMap<K, V>(override val comparator: Comparator<Pair<K, V>>) : O
         TODO("Not yet implemented")
     }
 
-    override val duplicateKeyMode: OrderedMap.InsertMode
-        get() = TODO("Not yet implemented")
+
     override val size: Int = 0
 
-    override fun contains(element: Pair<K, V>): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun contains(element: Pair<K, V>) = false
 
-    override fun containsAll(elements: Collection<Pair<K, V>>): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun containsAll(elements: Collection<Pair<K, V>>) = false
 
-    override fun isEmpty(): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun isEmpty() = true
 
-    override fun iterator(): Iterator<Pair<K, V>> {
-        TODO("Not yet implemented")
-    }
+    override fun iterator() = emptyList<Pair<K, V>>().iterator()
 }
