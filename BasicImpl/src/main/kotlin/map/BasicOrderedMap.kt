@@ -3,6 +3,7 @@ package map
 import orderedCollection.map.OrderedMap
 
 class BasicOrderedMap<K, V>(override val comparator: Comparator<Pair<K, V>>) : OrderedMap<K, V> {
+    private val list: MutableList<Pair<K, V>> = mutableListOf()
     override fun at(key: K): V {
         TODO("Not yet implemented")
     }
@@ -25,8 +26,7 @@ class BasicOrderedMap<K, V>(override val comparator: Comparator<Pair<K, V>>) : O
 
     override val duplicateKeyMode: OrderedMap.InsertMode
         get() = TODO("Not yet implemented")
-    override val size: Int
-        get() = TODO("Not yet implemented")
+    override val size: Int = 0
 
     override fun contains(element: Pair<K, V>): Boolean {
         TODO("Not yet implemented")
