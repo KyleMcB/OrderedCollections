@@ -44,6 +44,10 @@ class BasicOrderedMap<K, V>(
             val pair = borrowFirstValue(key)
             val index = list.binarySearch(pair, comparator)
             if (index > -1) return list.subList(0, index + 1)
+            else {
+                val closeIndex = -(index + 1)
+                return list.subList(0, closeIndex)
+            }
         }
         return emptyList()
     }

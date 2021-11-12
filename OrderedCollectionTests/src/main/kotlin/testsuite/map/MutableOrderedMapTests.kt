@@ -70,7 +70,7 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
     fun tailSetNoMatch() {
         val data = values.take(10).toMutableList()
         data.sortWith(map.comparator)
-        val removedItem = data[5]
+        val removedItem = data[4]
         data.remove(removedItem)
         map.addAll(data)
         val lowerPart = data.subList(0, 4)
