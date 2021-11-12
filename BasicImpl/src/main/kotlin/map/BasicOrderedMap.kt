@@ -8,24 +8,16 @@ class BasicOrderedMap<K, V>(
 ) : OrderedMap<K, V> {
     private val list: MutableList<Pair<K, V>> = mutableListOf()
     override fun at(key: K): V {
-        TODO("Not yet implemented")
+        throw NoSuchElementException()
     }
 
-    override fun atOrNull(key: K): V? {
-        TODO("Not yet implemented")
-    }
+    override fun atOrNull(key: K): V? = null
 
-    override fun headSet(key: K): Iterable<Pair<K, V>> {
-        TODO("Not yet implemented")
-    }
+    override fun headSet(key: K) = emptyList<Pair<K, V>>()
 
-    override fun tailSet(key: K): Iterable<Pair<K, V>> {
-        TODO("Not yet implemented")
-    }
+    override fun tailSet(key: K) = emptyList<Pair<K, V>>()
 
-    override fun subList(start: K, end: K): Iterable<Pair<K, V>> {
-        TODO("Not yet implemented")
-    }
+    override fun subList(start: K, end: K) = emptyList<Pair<K, V>>()
 
 
     override val size: Int = 0

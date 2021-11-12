@@ -2,10 +2,8 @@ package testsuite.map
 
 import orderedCollection.map.OrderedMap
 import org.junit.jupiter.api.Test
-import kotlin.test.assertContentEquals
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
+import org.junit.jupiter.api.assertThrows
+import kotlin.test.*
 
 interface EmptyOrderedMapTests<K, V> {
     val map: OrderedMap<K, V>
@@ -39,5 +37,25 @@ interface EmptyOrderedMapTests<K, V> {
     @Test
     fun subList() {
         assertContentEquals(emptyList(), map.subList(exampleValue.first, exampleValue.first))
+    }
+
+    @Test
+    fun tailSet() {
+        assertContentEquals(emptyList(), map.tailSet(exampleValue.first))
+    }
+
+    @Test
+    fun headSet() {
+        assertContentEquals(emptyList(), map.headSet(exampleValue.first))
+    }
+
+    @Test
+    fun atOrNull() {
+        assertNull(map.atOrNull(exampleValue.first))
+    }
+
+    @Test
+    fun at() {
+        assertThrows<NoSuchElementException> { map.at(exampleValue.first) }
     }
 }
