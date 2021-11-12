@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 interface MutableOrderedListTests<E : Comparable<E>> {
     val list: MutableOrderedList<E>
@@ -59,5 +60,12 @@ interface MutableOrderedListTests<E : Comparable<E>> {
         list.add(value2)
         list.remove(value1)
         assertEquals(value2, list[0])
+    }
+
+    @Test
+    fun containsOne() {
+        val value = values.first()
+        list.add(value)
+        assertTrue(list.contains(value))
     }
 }
