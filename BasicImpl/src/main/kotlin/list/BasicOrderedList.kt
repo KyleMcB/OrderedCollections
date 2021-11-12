@@ -5,6 +5,9 @@ import orderedCollection.list.OrderedList
 
 class BasicOrderedList<E : Comparable<E>>(private val list: MutableList<E> = mutableListOf<E>()) : OrderedList<E>,
     AbstractList<E>(), MutableOrderedList<E> {
+    init {
+        list.sort()
+    }
 
     override val size: Int
         get() {
