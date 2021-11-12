@@ -22,4 +22,11 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
         data.forEach { map.add(it) }
         assertContentEquals(data.sortedBy { it.first }, map)
     }
+
+    @Test
+    fun addAll() {
+        val data = values.take(100).shuffled().toList()
+        map.addAll(data)
+        assertContentEquals(data.sortedBy { it.first }, map)
+    }
 }
