@@ -29,4 +29,5 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
         map.addAll(data)
         assertContentEquals(data.sortedBy { it.first }, map)
     }
+
 }

@@ -42,9 +42,7 @@ class BasicOrderedMap<K, V>(
         return true
     }
 
-    override fun addAll(elements: Collection<Pair<K, V>>): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun addAll(elements: Collection<Pair<K, V>>) = list.addAll(elements).also { list.sortWith(comparator) }
 
     override fun clear() {
         TODO("Not yet implemented")
