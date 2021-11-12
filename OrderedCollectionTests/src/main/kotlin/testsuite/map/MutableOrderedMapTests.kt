@@ -1,6 +1,8 @@
 package testsuite.map
 
 import orderedCollection.map.MutableOrderedMap
+import orderedCollection.map.OrderedMap
+import org.junit.jupiter.api.Assumptions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import kotlin.test.assertContentEquals
@@ -81,11 +83,12 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
     @Test
     fun sublistExactMatch() {
         val data = values.take(10).toMutableList()
-        data.sortedBy { it.first }
-        val middlePart = data.subList(3, 8)
-        val result = map.subList(middlePart.first().first, middlePart.last().first)
+        map.addAll(data)
+        data.sortBy { it.first }
+        val middlePart = data.subList(3, 7)
+        val endElement = data[7]
+        val result = map.subList(middlePart.first().first, endElement.first).toList()
         assertContentEquals(middlePart, result)
-
     }
 
     @Test
@@ -96,15 +99,27 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
     }
 
     @Test
+    fun addNonUniqueReplace() {
+        Assumptions.assumeTrue(map.duplicateKeyMode == OrderedMap.InsertMode.REPLACE)
+        val (item1, item2) = values.take(2).toList()
+        map.add(item1)
+        val newItem = item1.first to item2.second
+        map.add(newItem)
+        assertEquals(1, map.size)
+        assertEquals(newItem, map.first())
+
+    }
+
+    @Test
     fun maintainSortAdd() {
-        val data = values.take(100).shuffled().toList()
+        val data = values.take(100).shuffled().toList().distinct()
         data.forEach { map.add(it) }
         assertContentEquals(data.sortedBy { it.first }, map)
     }
 
     @Test
     fun addAll() {
-        val data = values.take(100).shuffled().toList()
+        val data = values.take(100).shuffled().toList().distinct()
         map.addAll(data)
         assertContentEquals(data.sortedBy { it.first }, map)
     }

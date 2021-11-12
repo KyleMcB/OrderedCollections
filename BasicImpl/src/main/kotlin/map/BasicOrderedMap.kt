@@ -32,7 +32,7 @@ class BasicOrderedMap<K, V>(
             val index = list.binarySearch(pair, comparator)
             if (index > -1) return list.subList(index, list.size)
             else {
-                val closeIndex = -(index + 1)
+                val closeIndex = invertIndexFromSearch(index)
                 return list.subList(closeIndex, list.size)
             }
         }
@@ -45,7 +45,7 @@ class BasicOrderedMap<K, V>(
             val index = list.binarySearch(pair, comparator)
             if (index > -1) return list.subList(0, index + 1)
             else {
-                val closeIndex = -(index + 1)
+                val closeIndex = invertIndexFromSearch(index)
                 return list.subList(0, closeIndex)
             }
         }
@@ -54,10 +54,21 @@ class BasicOrderedMap<K, V>(
 
     private fun borrowFirstValue(key: K) = key to list[0].second
 
-    override fun subList(start: K, end: K) = emptyList<Pair<K, V>>()
+    override fun subList(start: K, end: K): Iterable<Pair<K, V>> {
+        if (isNotEmpty()) {
+            val startPair = borrowFirstValue(start)
+            val endPair = borrowFirstValue(end)
+            val startIndex = list.binarySearch(startPair, comparator)
+            val endIndex = list.binarySearch(endPair, comparator)
+            return list.subList(startIndex, endIndex)
+        }
+        return emptyList()
+    }
 
-
-    override val size: Int = 0
+    override val size: Int
+        get() {
+            return list.size
+        }
 
     override fun contains(element: Pair<K, V>) = false
 
@@ -69,7 +80,7 @@ class BasicOrderedMap<K, V>(
     override fun add(element: Pair<K, V>): Boolean {
         val index = list.binarySearch(element, comparator)
         if (index < 0) {
-            val actualIndex = -(index + 1)
+            val actualIndex = invertIndexFromSearch(index)
             list.add(actualIndex, element)
         } else when (duplicateKeyMode) {
             OrderedMap.InsertMode.REPLACE -> list[index] = element
@@ -77,6 +88,8 @@ class BasicOrderedMap<K, V>(
         }
         return true
     }
+
+    private fun invertIndexFromSearch(index: Int) = -(index + 1)
 
     override fun addAll(elements: Collection<Pair<K, V>>) = list.addAll(elements).also { list.sortWith(comparator) }
 
