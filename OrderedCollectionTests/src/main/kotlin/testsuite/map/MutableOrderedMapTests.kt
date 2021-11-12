@@ -193,4 +193,11 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
         map.addAll(data)
         assertTrue { map.containsAll(data) }
     }
+
+    @Test
+    fun sizeIsZeroAfterClear() {
+        map.addAll(distinct.take(10))
+        map.clear()
+        assertEquals(0, map.size)
+    }
 }
