@@ -208,5 +208,11 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
         assertContentEquals(emptyList(), map)
     }
 
-    
+    @Test
+    fun removeOne() {
+        val item = distinct.first()
+        map.add(item)
+        map.remove(item)
+        assertContentEquals(emptyList(), map)
+    }
 }
