@@ -4,6 +4,7 @@
 
 plugins {
     kotlin("jvm")
+    `maven-publish`
 }
 
 group = "com.xingpeds.orderedcollections"
@@ -11,6 +12,20 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+}
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("OrderedCollections") {
+                from(components["java"])
+                groupId = "com.github.KyleMcB.orderedcollections"
+                artifactId = "impl"
+            }
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
 }
 tasks.test {
     useJUnitPlatform()
