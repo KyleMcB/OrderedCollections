@@ -43,4 +43,12 @@ interface MutableOrderedListTests<E : Comparable<E>> {
             list[0]
         }
     }
+
+    @Test
+    fun getOneElement() {
+        val value = values.first()
+        list.add(value)
+        val result = list[0]
+        assertEquals(value, result)
+    }
 }
