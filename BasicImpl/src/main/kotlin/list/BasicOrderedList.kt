@@ -27,7 +27,7 @@ class BasicOrderedList<E : Comparable<E>>(private val list: MutableList<E> = mut
     }
 
     override fun remove(element: E): Boolean {
-        TODO("Not yet implemented")
+        return list.remove(element)
     }
 
     override fun removeAll(elements: Collection<E>): Boolean {
