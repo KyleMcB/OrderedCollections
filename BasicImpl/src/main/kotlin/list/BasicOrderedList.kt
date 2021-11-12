@@ -16,9 +16,7 @@ class BasicOrderedList<E : Comparable<E>>(private val list: MutableList<E> = mut
         return true
     }
 
-    override fun addAll(elements: Collection<E>): Boolean {
-        TODO("Not yet implemented")
-    }
+    override fun addAll(elements: Collection<E>) = list.addAll(elements)
 
     override fun clear() = list.clear()
 
@@ -42,19 +40,13 @@ class BasicOrderedList<E : Comparable<E>>(private val list: MutableList<E> = mut
 
     override fun isEmpty() = list.isEmpty()
 
-    override fun iterator(): MutableIterator<E> {
-        return mutableListOf<E>().iterator()
-    }
+    override fun iterator() = list.iterator()
 
     override fun get(index: Int) = list[index]
 
-    override fun indexOf(element: E): Int {
-        return -1
-    }
+    override fun indexOf(element: E) = list.indexOf(element)
 
-    override fun lastIndexOf(element: E): Int {
-        return -1
-    }
+    override fun lastIndexOf(element: E) = list.lastIndexOf(element)
 
     override fun listIterator() = list.listIterator()
 

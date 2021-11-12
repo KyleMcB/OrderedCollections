@@ -96,6 +96,13 @@ interface MutableOrderedListTests<E : Comparable<E>> {
         assertThrows<IndexOutOfBoundsException> { list[0] }
     }
 
+    @Test
+    fun addAll() {
+        val data = values.take(100).toList()
+        list.addAll(data)
+        assertContentEquals(data, list)
+    }
+
     @Disabled
     @Test
     fun sortedOrderAddAll() {
