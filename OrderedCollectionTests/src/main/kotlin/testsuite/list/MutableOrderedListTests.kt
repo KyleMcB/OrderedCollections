@@ -103,6 +103,11 @@ interface MutableOrderedListTests<E : Comparable<E>> {
         assertContentEquals(data, list)
     }
 
+    @Test
+    fun removeAllEmpty() {
+        assertFalse { list.removeAll(emptyList()) }
+    }
+
     @Disabled
     @Test
     fun sortedOrderAddAll() {
