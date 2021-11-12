@@ -12,7 +12,13 @@ class BasicOrderedList<E : Comparable<E>>(private val list: MutableList<E> = mut
         }
 
     override fun add(element: E): Boolean {
-        list.add(element)
+        val potentialIndex = list.binarySearch(element)
+        if (potentialIndex > 0) {
+            list.add(potentialIndex, element)
+        } else {
+            val index = -(potentialIndex + 1)
+            list.add(index, element)
+        }
         return true
     }
 

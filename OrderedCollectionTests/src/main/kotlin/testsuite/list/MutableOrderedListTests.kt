@@ -75,7 +75,7 @@ interface MutableOrderedListTests<E : Comparable<E>> {
 
     @Test
     fun iterator() {
-        val (value1, value2) = values.take(2).toList()
+        val (value1, value2) = values.take(2).toList().sorted()
         list.add(value1)
         list.add(value2)
         assertEquals(value1, list.first())
@@ -100,7 +100,7 @@ interface MutableOrderedListTests<E : Comparable<E>> {
     fun addAll() {
         val data = values.take(100).toList()
         list.addAll(data)
-        assertContentEquals(data, list)
+        assertContentEquals(data.sorted(), list)
     }
 
     @Test
@@ -127,7 +127,7 @@ interface MutableOrderedListTests<E : Comparable<E>> {
         result.retainAll(data.subList(20, 30))
         list.addAll(data)
         list.retainAll(data.subList(20, 30))
-        assertIterableEquals(result, list)
+        assertIterableEquals(result.sorted(), list)
     }
 
     @Test
@@ -137,22 +137,20 @@ interface MutableOrderedListTests<E : Comparable<E>> {
         result.removeAll(data.subList(2, 4))
         list.addAll(data)
         list.removeAll(data.subList(2, 4))
-        assertIterableEquals(result, list)
+        assertIterableEquals(result.sorted(), list)
     }
 
     @Test
     fun sortedOrderAddAll() {
         val data = values.take(1000).shuffled().toList()
-        println(data)
         list.addAll(data)
-        println(list)
         assertIterableEquals(data.sorted(), list)
     }
 
-    @Disabled
+
     @Test
     fun sortedOrderAdd() {
-        val data = values.take(1000).shuffled().toList()
+        val data = values.take(10).shuffled().toList()
         data.forEach {
             list.add(it)
         }
