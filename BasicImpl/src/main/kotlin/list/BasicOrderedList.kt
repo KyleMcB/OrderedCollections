@@ -44,7 +44,7 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E>, AbstractList<E>(), M
     }
 
     override fun isEmpty(): Boolean {
-        return true
+        return _size == 0
     }
 
     override fun iterator(): MutableIterator<E> {
