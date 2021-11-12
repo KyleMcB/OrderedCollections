@@ -20,7 +20,7 @@ class BasicOrderedList<E : Comparable<E>> : OrderedList<E>, AbstractList<E>(), M
     }
 
     override fun clear() {
-        TODO("Not yet implemented")
+        _size = 0
     }
 
     override fun remove(element: E): Boolean {

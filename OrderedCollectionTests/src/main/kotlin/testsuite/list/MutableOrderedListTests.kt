@@ -3,6 +3,7 @@ package testsuite.list
 import orderedCollection.list.MutableOrderedList
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 
 interface MutableOrderedListTests<E : Comparable<E>> {
     val list: MutableOrderedList<E>
@@ -27,5 +28,11 @@ interface MutableOrderedListTests<E : Comparable<E>> {
         list.add(values.first())
         list.clear()
         assertEquals(0, list.size)
+    }
+
+    @Test
+    fun isEmptyFalseAfterAdd() {
+        list.add(values.first())
+        assertFalse { list.isEmpty() }
     }
 }
