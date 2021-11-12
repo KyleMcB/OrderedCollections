@@ -10,7 +10,7 @@ class BasicOrderedMap<K, V>(
     private val list: MutableList<Pair<K, V>> = mutableListOf()
     override fun at(key: K): V {
         if (isNotEmpty()) {
-            val item = key to list[0].second
+            val item = borrowFirstValue(key)
             val index = list.binarySearch(item, comparator)
             if (index > -1)
                 return list[index].second
@@ -28,7 +28,7 @@ class BasicOrderedMap<K, V>(
 
     override fun headSet(key: K): Iterable<Pair<K, V>> {
         if (isNotEmpty()) {
-            val pair = key to list[0].second
+            val pair = borrowFirstValue(key)
             val index = list.binarySearch(pair, comparator)
             if (index > -1) return list.subList(index, list.size)
             else {
@@ -39,7 +39,16 @@ class BasicOrderedMap<K, V>(
         return emptyList()
     }
 
-    override fun tailSet(key: K) = emptyList<Pair<K, V>>()
+    override fun tailSet(key: K): Iterable<Pair<K, V>> {
+        if (isNotEmpty()) {
+            val pair = borrowFirstValue(key)
+            val index = list.binarySearch(pair, comparator)
+            if (index > -1) return list.subList(0, index + 1)
+        }
+        return emptyList()
+    }
+
+    private fun borrowFirstValue(key: K) = key to list[0].second
 
     override fun subList(start: K, end: K) = emptyList<Pair<K, V>>()
 

@@ -59,9 +59,23 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
     @Test
     fun tailSetExactMatch() {
         val data = values.take(10).toMutableList()
+        map.addAll(data)
         data.sortWith(map.comparator)
         val lowerPart = data.subList(0, 5)
-        assertContentEquals(lowerPart, map.tailSet(lowerPart.last().first))
+        val result = map.tailSet(lowerPart.last().first)
+        assertContentEquals(lowerPart, result)
+    }
+
+    @Test
+    fun tailSetNoMatch() {
+        val data = values.take(10).toMutableList()
+        data.sortWith(map.comparator)
+        val removedItem = data[5]
+        data.remove(removedItem)
+        map.addAll(data)
+        val lowerPart = data.subList(0, 4)
+        val result = map.tailSet(removedItem.first)
+        assertContentEquals(lowerPart, result)
     }
 
     @Test
