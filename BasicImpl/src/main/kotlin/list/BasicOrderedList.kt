@@ -16,7 +16,7 @@ class BasicOrderedList<E : Comparable<E>>(private val list: MutableList<E> = mut
         return true
     }
 
-    override fun addAll(elements: Collection<E>) = list.addAll(elements)
+    override fun addAll(elements: Collection<E>) = list.addAll(elements).also { list.sort() }
 
     override fun clear() = list.clear()
 

@@ -140,11 +140,12 @@ interface MutableOrderedListTests<E : Comparable<E>> {
         assertIterableEquals(result, list)
     }
 
-    @Disabled
     @Test
     fun sortedOrderAddAll() {
         val data = values.take(1000).shuffled().toList()
+        println(data)
         list.addAll(data)
+        println(list)
         assertIterableEquals(data.sorted(), list)
     }
 
