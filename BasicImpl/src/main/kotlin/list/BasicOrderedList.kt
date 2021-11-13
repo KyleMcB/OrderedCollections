@@ -43,7 +43,7 @@ class BasicOrderedList<E>(
 
     override fun add(element: E): Boolean {
         val potentialIndex = list.binarySearch(element = element, comparator = comparator)
-        if (potentialIndex > 0) {
+        if (potentialIndex > -1) {
             list.add(potentialIndex, element)
         } else {
             val index = -(potentialIndex + 1)
