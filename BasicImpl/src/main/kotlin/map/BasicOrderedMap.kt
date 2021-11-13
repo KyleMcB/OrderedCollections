@@ -27,7 +27,7 @@ fun <K : Comparable<K>, V> Collection<Pair<K, V>>.toMutableOrderedMap(): Mutable
 
 /**
  * BasicOrderedMap holds a list and keeps the list sorted on insertion by using binarySearch to find where the element should go.
- * AddAll is a little lazy and adds the collection the the list and then just sorts, so this could be an expensive operation.
+ * AddAll is a little lazy and adds the collection the list and then just sorts, so this could be an expensive operation.
  *
  *
  * @param K type for the keys in the map
