@@ -7,6 +7,8 @@ plugins {
     id("org.jetbrains.kotlin.libs.publisher") version "0.0.60-dev-32"
     kotlin("jvm") version "1.5.31"
     `maven-publish`
+    jacoco
+
 }
 
 group = "com.xingpeds.orderedcollections"
@@ -36,6 +38,14 @@ tasks.test {
     testLogging {
         events("passed", "skipped", "failed")
     }
+
+}
+
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+}
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
 }
 dependencies {
     implementation(kotlin("stdlib"))

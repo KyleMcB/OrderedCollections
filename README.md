@@ -3,6 +3,7 @@
 ---
 [![](https://jitpack.io/v/KyleMcB/OrderedCollections.svg)](https://jitpack.io/#KyleMcB/OrderedCollections)
 [![wakatime](https://wakatime.com/badge/user/cca5596a-2916-4d3a-8bcb-cdd652e25cf1/project/83ebdd9f-3e24-4a9a-95f4-53508d7ec40b.svg)](https://wakatime.com/badge/user/cca5596a-2916-4d3a-8bcb-cdd652e25cf1/project/83ebdd9f-3e24-4a9a-95f4-53508d7ec40b)
+[![Build Status](https://app.travis-ci.com/KyleMcB/OrderedCollections.svg?branch=main)](https://app.travis-ci.com/KyleMcB/OrderedCollections)
 
 I love kotlin, but coming from C++ I feel the stdlib is lacking a few things. Namely Collections that maintain order. So
 I made some.
