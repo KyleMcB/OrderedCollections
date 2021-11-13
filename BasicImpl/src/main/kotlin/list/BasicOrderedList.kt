@@ -21,12 +21,17 @@ fun <E : Comparable<E>> Collection<E>.toOrderedList(): OrderedList<E> =
 fun <E : Comparable<E>> Collection<E>.toMutableOrderedList(): MutableOrderedList<E> =
     BasicOrderedList(comparator = naturalOrder(), list = this.toMutableList())
 
+/**
+ * BasicOrderedList is a list the maintains sorted order using binarySearch, or just sorting after an addAll
+ *
+ * @param E Type held in the list
+ * @property comparator comparison functor to keep the list sorted
+ * @property list you can seed the list from another collection
+ */
 class BasicOrderedList<E>(
     override val comparator: Comparator<E>,
     private val list: MutableList<E> = mutableListOf()
-) : OrderedList<E>,
-
-    AbstractList<E>(), MutableOrderedList<E> {
+) : OrderedList<E>, AbstractList<E>(), MutableOrderedList<E> {
     init {
         list.sortWith(comparator)
     }

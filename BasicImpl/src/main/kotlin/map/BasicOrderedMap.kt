@@ -25,7 +25,16 @@ fun <K : Comparable<K>, V> Collection<Pair<K, V>>.toOrderedMap(): OrderedMap<K, 
 fun <K : Comparable<K>, V> Collection<Pair<K, V>>.toMutableOrderedMap(): MutableOrderedMap<K, V> =
     BasicOrderedMap<K, V>(comparator = compareBy { it.first }).also { it.addAll(this) }
 
-
+/**
+ * BasicOrderedMap holds a list and keeps the list sorted on insertion by using binarySearch to find where the element should go.
+ * AddAll is a little lazy and adds the collection the the list and then just sorts, so this could be an expensive operation.
+ *
+ *
+ * @param K type for the keys in the map
+ * @param V type for the values in the map
+ * @property comparator a comparison functor to compare keys and keep the list sorted and efficient
+ * @property duplicateKeyMode this map only allows unique keys, so REPLACE mode replaces the item in the map and IGNORE ignores the new value on insertion keeping the old value
+ */
 class BasicOrderedMap<K, V>(
     override val comparator: Comparator<Pair<K, V>>,
     override val duplicateKeyMode: OrderedMap.InsertMode = OrderedMap.InsertMode.REPLACE
