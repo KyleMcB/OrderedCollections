@@ -1,3 +1,5 @@
+before_install:
+  – chmod +x gradlew
 language: java
 sudo: false
 after_success:
