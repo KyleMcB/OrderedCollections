@@ -18,8 +18,8 @@ repositories {
     maven(url = "https://jitpack.io")
 }
 dependencies {
-    implementation("com.github.KyleMcB.OrderedCollections:core:listandmapbeta2")
-    implementation("com.github.KyleMcB.OrderedCollections:impl:listandmapbeta2")
+    implementation("com.github.KyleMcB.OrderedCollections:core:2.1")
+    implementation("com.github.KyleMcB.OrderedCollections:impl:2.1")
 }
 ```
 

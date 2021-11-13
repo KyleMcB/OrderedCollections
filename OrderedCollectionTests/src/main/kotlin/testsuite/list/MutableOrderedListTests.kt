@@ -60,6 +60,16 @@ interface MutableOrderedListTests<E : Comparable<E>> {
     }
 
     @Test
+    fun duplicateItems() {
+        val value = values.first()
+        list.add(value)
+        list.add(value)
+        assertEquals(2, list.size)
+        assertEquals(value, list[0])
+        assertEquals(value, list[1])
+    }
+
+    @Test
     fun addTwoRemoveOne() {
         val (value1, value2) = values.take(2).toList()
         list.add(value1)
