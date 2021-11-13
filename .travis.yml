@@ -9,4 +9,4 @@ sudo: false
 after_success:
   - curl -Os https://uploader.codecov.io/latest/linux/codecov
   - chmod +x codecov
-  - ./codecov -t ${CODECOV_TOKEN}
+  - ./codecov -t 106c9f60-0905-4c45-9453-1e216d7a66e0
