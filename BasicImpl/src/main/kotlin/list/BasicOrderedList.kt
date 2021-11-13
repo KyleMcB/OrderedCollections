@@ -7,6 +7,20 @@ package list
 import orderedCollection.list.MutableOrderedList
 import orderedCollection.list.OrderedList
 
+fun <E : Comparable<E>> orderedListOf(): OrderedList<E> = BasicOrderedList(naturalOrder())
+fun <E : Comparable<E>> orderedListOf(vararg es: E): OrderedList<E> =
+    BasicOrderedList(comparator = naturalOrder(), list = es.toMutableList())
+
+fun <E : Comparable<E>> mutableOrderedListOf(): MutableOrderedList<E> = BasicOrderedList(comparator = naturalOrder())
+fun <E : Comparable<E>> mutableOrderedListOf(vararg items: E): MutableOrderedList<E> =
+    BasicOrderedList(comparator = naturalOrder(), list = items.toMutableList())
+
+fun <E : Comparable<E>> Collection<E>.toOrderedList(): OrderedList<E> =
+    BasicOrderedList(comparator = naturalOrder(), list = this.toMutableList())
+
+fun <E : Comparable<E>> Collection<E>.toMutableOrderedList(): MutableOrderedList<E> =
+    BasicOrderedList(comparator = naturalOrder(), list = this.toMutableList())
+
 class BasicOrderedList<E>(
     override val comparator: Comparator<E>,
     private val list: MutableList<E> = mutableListOf()

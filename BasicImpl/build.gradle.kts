@@ -7,26 +7,25 @@ plugins {
     `maven-publish`
 }
 
-group = "com.xingpeds.orderedcollections"
+group = "com.github.KyleMcB.orderedcollections"
 version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
 }
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("OrderedCollections") {
-                from(components["java"])
-                groupId = "com.github.KyleMcB.orderedcollections"
-                artifactId = "impl"
-            }
+
+publishing {
+    publications {
+        create<MavenPublication>("OrderedCollections") {
+            from(components["java"])
+            artifactId = "impl"
         }
     }
-    repositories {
-        mavenLocal()
-    }
 }
+repositories {
+    mavenLocal()
+}
+
 tasks.test {
     useJUnitPlatform()
     testLogging {
@@ -34,9 +33,10 @@ tasks.test {
     }
 }
 dependencies {
-    implementation(project(":interfaces"))
+    implementation(project(":core"))
     implementation(kotlin("stdlib"))
     implementation(project(":OrderedCollectionTests"))
-    implementation(platform("org.junit:junit-bom:5.8.1"))
-    implementation("org.junit.jupiter:junit-jupiter")
+    testImplementation(platform("org.junit:junit-bom:5.8.1"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation(kotlin("test"))
 }

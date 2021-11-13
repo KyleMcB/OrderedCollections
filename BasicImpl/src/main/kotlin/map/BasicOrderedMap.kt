@@ -7,6 +7,25 @@ package map
 import orderedCollection.map.MutableOrderedMap
 import orderedCollection.map.OrderedMap
 
+fun <K : Comparable<K>, V> orderedMapOf(vararg pairs: Pair<K, V>): OrderedMap<K, V> =
+    BasicOrderedMap<K, V>(comparator = compareBy { it.first })
+        .apply { addAll(pairs) }
+
+fun <K : Comparable<K>, V> orderedMapOf(): OrderedMap<K, V> = BasicOrderedMap(comparator = compareBy { it.first })
+
+fun <K : Comparable<K>, V> mutableOrderedMapOf(): MutableOrderedMap<K, V> =
+    BasicOrderedMap<K, V>(comparator = compareBy { it.first })
+
+fun <K : Comparable<K>, V> mutableOrderedMapOf(vararg pairs: Pair<K, V>): MutableOrderedMap<K, V> =
+    BasicOrderedMap<K, V>(comparator = compareBy { it.first }).apply { addAll(pairs) }
+
+fun <K : Comparable<K>, V> Collection<Pair<K, V>>.toOrderedMap(): OrderedMap<K, V> =
+    BasicOrderedMap<K, V>(comparator = compareBy { it.first }).also { it.addAll(this) }
+
+fun <K : Comparable<K>, V> Collection<Pair<K, V>>.toMutableOrderedMap(): MutableOrderedMap<K, V> =
+    BasicOrderedMap<K, V>(comparator = compareBy { it.first }).also { it.addAll(this) }
+
+
 class BasicOrderedMap<K, V>(
     override val comparator: Comparator<Pair<K, V>>,
     override val duplicateKeyMode: OrderedMap.InsertMode = OrderedMap.InsertMode.REPLACE
