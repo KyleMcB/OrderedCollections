@@ -146,7 +146,16 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
         val newItem = item1.first to item2.second
         map.add(newItem)
         assertEquals(newItem, map.first())
+    }
 
+    @Test
+    fun addNonUniqueIgnore() {
+        Assumptions.assumeTrue(map.duplicateKeyMode == OrderedMap.InsertMode.IGNORE)
+        val (oldItem, item2) = distinct.take(2).toList()
+        map.add(oldItem)
+        val newItem = oldItem.first to item2.second
+        map.add(newItem)
+        assertEquals(oldItem.second, map.at(newItem.first))
     }
 
     @Test

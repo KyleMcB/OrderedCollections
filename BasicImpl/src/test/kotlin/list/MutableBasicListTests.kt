@@ -21,3 +21,4 @@ class MutableBasicListTests : MutableOrderedListTests<Int> {
         Assertions.assertIterableEquals(data.sorted(), newList)
     }
 }
+
