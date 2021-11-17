@@ -18,4 +18,13 @@ interface OrderedSetTests<E : Comparable<E>> {
         set.addAll(list)
         assertContentEquals(list.sorted(), set)
     }
+
+    @Test
+    fun duplicateItem() {
+        val value = infiniteSeq.first()
+        set.add(value)
+        set.add(value)
+        assertContentEquals(listOf(value), set)
+    }
+    
 }

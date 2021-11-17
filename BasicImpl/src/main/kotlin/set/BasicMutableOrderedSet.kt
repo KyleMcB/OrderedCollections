@@ -9,11 +9,19 @@ import orderedCollection.set.MutableOrderedSet
 class BasicMutableOrderedSet<E>(override val comparator: Comparator<E>, val set: MutableList<E> = mutableListOf()) :
     MutableOrderedSet<E> {
     override fun add(element: E): Boolean {
-        TODO("Not yet implemented")
+        val index = set.binarySearch(element, comparator)
+        return if (index < 0) {
+            //not in set
+            val positiveIndex = -(index + 1)
+            set.add(positiveIndex, element)
+            true
+        } else {
+            //in set
+            false
+        }
     }
 
-    override val size: Int
-        get() = TODO("Not yet implemented")
+    override val size = set.size
 
     override fun contains(element: E): Boolean {
         TODO("Not yet implemented")
@@ -27,12 +35,15 @@ class BasicMutableOrderedSet<E>(override val comparator: Comparator<E>, val set:
         TODO("Not yet implemented")
     }
 
-    override fun iterator(): MutableIterator<E> {
-        TODO("Not yet implemented")
-    }
+    override fun iterator(): MutableIterator<E> = set.listIterator()
 
     override fun addAll(elements: Collection<E>): Boolean {
-        TODO("Not yet implemented")
+        val before = size
+        for (element in elements) {
+            add(element)
+        }
+        val after = size
+        return before < after
     }
 
     override fun clear() {
