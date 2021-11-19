@@ -237,8 +237,7 @@ interface MutableOrderedMapTests<K : Comparable<K>, V> {
         map.addAll(items)
         items.removeAll(removed)
         map.removeAll(removed)
-        println(items)
-        println(map.toList())
+
         assertContentEquals(items, map)
     }
 
