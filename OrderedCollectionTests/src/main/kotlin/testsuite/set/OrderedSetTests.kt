@@ -51,5 +51,10 @@ interface OrderedSetTests<E : Comparable<E>> {
         assertTrue { set.contains(value) }
     }
 
+    @Test
+    fun containsAllFalse() {
+        val values = infiniteSeq.take(10).toList()
+        assertFalse { set.containsAll(values) }
+    }
 
 }
