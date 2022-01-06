@@ -44,4 +44,11 @@ interface OrderedSetTests<E : Comparable<E>> {
         }
     }
 
+    @Test
+    fun containsOne() {
+        val value = infiniteSeq.first()
+        set.add(value)
+        assertTrue { set.contains(value) }
+    }
+
 }
