@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021. Kyle McBurnett
+ * Copyright (c) 2021-2022. Kyle McBurnett
  */
 
 package set
@@ -7,7 +7,7 @@ package set
 import orderedCollection.set.MutableOrderedSet
 
 class BasicMutableOrderedSet<E>(override val comparator: Comparator<E>, val set: MutableList<E> = mutableListOf()) :
-    MutableOrderedSet<E>, MutableCollection<E> by set {
+    MutableOrderedSet<E>, MutableCollection<E> {
     override fun add(element: E): Boolean {
         val index = set.binarySearch(element, comparator)
         return if (index < 0) {
@@ -31,5 +31,36 @@ class BasicMutableOrderedSet<E>(override val comparator: Comparator<E>, val set:
         return before < after
     }
 
+    override val size: Int
+        get() = set.size
 
+    override fun contains(element: E): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun containsAll(elements: Collection<E>): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun isEmpty(): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun iterator(): MutableIterator<E> = set.iterator()
+
+    override fun clear() {
+        TODO("Not yet implemented")
+    }
+
+    override fun remove(element: E): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun removeAll(elements: Collection<E>): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun retainAll(elements: Collection<E>): Boolean {
+        TODO("Not yet implemented")
+    }
 }

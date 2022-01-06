@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021. Kyle McBurnett
+ * Copyright (c) 2021-2022. Kyle McBurnett
  */
 
 plugins {
@@ -43,8 +43,6 @@ tasks.test {
 dependencies {
     implementation(project(":core"))
     implementation(kotlin("stdlib"))
-    implementation(project(":OrderedCollectionTests"))
-    testImplementation(platform("org.junit:junit-bom:5.8.1"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation(kotlin("test"))
+    implementation(project(":OrderedCollectionTests"))
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021. Kyle McBurnett
+ * Copyright (c) 2021-2022. Kyle McBurnett
  */
 
 plugins {
@@ -44,6 +44,6 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.junit.jupiter:junit-jupiter:5.7.0")
     implementation(kotlin("test"))
-    testImplementation(platform("org.junit:junit-bom:5.8.1"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    implementation(platform("org.junit:junit-bom:5.8.1"))
+    implementation("org.junit.jupiter:junit-jupiter")
 }

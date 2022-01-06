@@ -1,11 +1,12 @@
 /*
- * Copyright (c) 2021. Kyle McBurnett
+ * Copyright (c) 2021-2022. Kyle McBurnett
  */
 
 package testsuite.set
 
 import orderedCollection.set.MutableOrderedSet
 import org.junit.jupiter.api.Test
+import kotlin.test.*
 import kotlin.test.assertContentEquals
 
 interface OrderedSetTests<E : Comparable<E>> {
@@ -20,11 +21,27 @@ interface OrderedSetTests<E : Comparable<E>> {
     }
 
     @Test
-    fun duplicateItem() {
+    fun noDuplicateItems() {
         val value = infiniteSeq.first()
         set.add(value)
         set.add(value)
         assertContentEquals(listOf(value), set)
     }
-    
+
+    @Test
+    fun size() {
+        assertEquals(0, set.size)
+        val value = infiniteSeq.first()
+        set.add(value)
+        assertEquals(1, set.size)
+    }
+
+    @Test
+    fun containsNothing() {
+        val value = infiniteSeq.first()
+        assertFalse {
+            set.contains(value)
+        }
+    }
+
 }
