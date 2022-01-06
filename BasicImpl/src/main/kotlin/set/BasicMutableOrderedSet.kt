@@ -44,9 +44,7 @@ class BasicMutableOrderedSet<E>(override val comparator: Comparator<E>, val set:
 
     override fun iterator(): MutableIterator<E> = set.iterator()
 
-    override fun clear() {
-        TODO("Not yet implemented")
-    }
+    override fun clear() = set.clear()
 
     override fun remove(element: E): Boolean {
         TODO("Not yet implemented")

@@ -70,4 +70,11 @@ interface OrderedSetTests<E : Comparable<E>> {
         set.addAll(values.take(9))
         assertFalse { set.containsAll(values) }
     }
+
+    @Test
+    fun clear() {
+        set.add(infiniteSeq.first())
+        set.clear()
+        assertEquals(0, set.size)
+    }
 }
