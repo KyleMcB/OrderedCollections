@@ -35,7 +35,7 @@ class BasicMutableOrderedSet<E>(override val comparator: Comparator<E>, val set:
         get() = set.size
 
     override fun contains(element: E): Boolean {
-        TODO("Not yet implemented")
+        return false
     }
 
     override fun containsAll(elements: Collection<E>): Boolean {
